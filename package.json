@@ -1,0 +1,81 @@
+{
+  "name": "Liverum",
+  "version": "0.01.01",
+  "description": "Blockchain powered books",
+  "main": "lib/index.js",
+  "scripts": {
+    "compile": "NODE_ENV=production babel --optional runtime -d lib/ src/modules/",
+    "prepare": "npm run compile",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "deploy": "gh-pages-deploy",
+    "clean-source": "rimraf moduels lib src public .babelrc .eslintrc .npmignore package.json README.md",
+    "precommit": "pretty-quick --staged",
+    "format": "prettier --write \"src/**/*.js\"",
+    "test": "eslint -c .eslintrc src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simbadMarino/liverum-.git"
+  },
+  "author": "simbadMarino",
+  "license": "MIT",
+  "bugs": {
+    "url": "localhost:3000"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "homepage": "https://gateway.btfssoter.io/btfs/QmaCFAhBLgwyeQT1hdDoWpYs71UJrmhawQ5NQgKUHmgyMM",
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "gh-pages-deploy": "^0.5.1",
+    "husky": "^3.0.4",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "^3.3.0",
+    "rimraf": "^3.0.0",
+    "styled-components": "^4.3.2",
+    "styled-components-breakpoint": "^2.1.1"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.8.0",
+    "@material-ui/icons": "^4.5.1",
+    "epubjs": "^0.3.85",
+    "node-sass": "^4.11.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-scripts": "^2.1.8",
+    "react-swipeable": "^5.4.0",
+    "sweetalert2": "^8.5.0",
+    "tronweb": "^2.3.4",
+    "typeface-roboto": "0.0.75"
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0"
+  },
+  "gh-pages-deploy": {
+    "staticpath": "build",
+    "prep": [
+      "build"
+    ],
+    "post": [
+      "clean-source"
+    ],
+    "noprompt": false
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
