@@ -175,22 +175,6 @@ class App extends Component {
 
       <Container>
 
-
-
-        <ReaderContainer fullscreen={fullscreen}>
-          <ReactReader
-            url={
-              "https://gateway.btfssoter.io/btfs/QmZVMJXP4o7QRHFHpqECbjwewJXHFHG46T5wrroL7tK6iM/Montecristo.epub"
-            }
-            locationChanged={this.onLocationChanged}
-            title={"El Conde de Montecristo"}
-            location={location}
-            getRendition={this.getRendition}
-          />
-
-        </ReaderContainer>
-
-
         <PersistentDrawerLeft/>
 
       </Container>

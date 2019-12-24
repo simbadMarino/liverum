@@ -26,6 +26,7 @@ import TronLinkGuide from "../components/TronLinkGuide";
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import DraftsIcon from '@material-ui/icons/Drafts';
+import LiverumLibrary from "../components/Library/library.js";
 const drawerWidth = 200;
 
 const useStyles = makeStyles(theme => ({
@@ -96,9 +97,8 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const openSettings = () => {
 
-  }
+
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
     const handleListItemClick = (event, index) => {
@@ -106,6 +106,7 @@ export default function PersistentDrawerLeft() {
       console.log(index);
     };
   return (
+
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -155,6 +156,7 @@ export default function PersistentDrawerLeft() {
        >
          <ListItemIcon>
            <AccountBalanceWalletIcon />
+
          </ListItemIcon>
          <ListItemText primary="Account" />
        </ListItem>
@@ -195,7 +197,7 @@ export default function PersistentDrawerLeft() {
       </List>
 
         <Divider />
-        <TronLinkInfo/>
+
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -203,12 +205,10 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Typography paragraph>
 
-        </Typography>
-        <Typography paragraph>
+        
+        {selectedIndex==0 ?(<TronLinkInfo/>): selectedIndex==1 ? (<LiverumLibrary/>): null}
 
-        </Typography>
       </main>
     </div>
   );

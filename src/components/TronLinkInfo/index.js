@@ -9,7 +9,8 @@ export default class TronLinkInfo extends Component {
     this.state = {
       accountAddress: "account address will show up here",
       accountBalance: "account balance will show up here",
-      accountBandwidth: "account bandwidth will show up here"
+      accountBandwidth: "account bandwidth will show up here",
+      accountTokensValue: "account tokens will show up here"
     };
   }
 
@@ -83,58 +84,30 @@ export default class TronLinkInfo extends Component {
   	    tokenIDs[i] = info.assetV2[i].key;  //Taking token IDs
   	    books =  await window.tronWeb.trx.getTokenFromID(tokenIDs[i]);
   	    tokenName[i] = books.name;
-  	    tokenValue[i] = info.assetV2[i].value; //Taking token values(Number of books per token)
+  	    tokenValue[i] = info.assetV2[i].value/1000000; //Taking token values(Number of books per token)
   	    console.log(tokenIDs[i] + " " + tokenName[i] + " = "+ tokenValue[i]);  //Debug sentence
 
-
-
-
-
-
-
-
-          //fs.writeSync(fd, tokenIDs[i] + '\n', null, null);
-
-          //console.log('Write string %s which is %d bytes.', codingArray[i], bytes);
-
-
-
-
   	}
-  	//console.log(tokenValue[i]);
-
 
       }
    //fs.closeSync(fd);
 
-
+   this.setState({
+     accountTokensValue: tokenValue
+     });
        console.log("Number of tokens with positive balance: " + tokenQuantityPositiveBalance);
 
-
-
-
-
-
-
-  	//console.log(info.assetV2); //get Full list of tokens
-  //	let info_1 = await tronWeb.trx.getTokensFromID(btt_address).then(balance => {
-  //	console.log({balance});
-  //	}).catch(err => console.error(err));
-
-      //let books = await tronWeb.trx.getTokenFromID(btt_address);
-     // console.log(books); //Debug
-  //	console.log(books.name + " : " + info.assetV2[0].value);
   }
 
 
 
   render() {
-    const { accountAddress, accountBalance, accountBandwidth } = this.state;
+    const { accountAddress, accountBalance, accountBandwidth,accountTokensValue } = this.state;
     return (
 
       <div className="tronLinkInfo-component-container">
         <div className="account-info-header">
-        TRON Account info
+        TRON-Liverum Account
         </div>
         <div className="account-info-address">
           Address: <span>{accountAddress}</span>
@@ -145,6 +118,26 @@ export default class TronLinkInfo extends Component {
         <div className="account-info-bandwidth">
           Bandwidth: <span>{accountBandwidth}</span>
         </div>
+        <div className="account-info-tokens">
+
+          List of Books:
+          <table>
+          <tr>
+            <th>Book Name</th>
+            <th>Quantity</th>
+          </tr>
+          <tr>
+            <td>Bittorrent</td>
+            <td>{accountTokensValue[0]}</td>
+          </tr>
+          <tr>
+            <td>CABBY</td>
+            <td>{accountTokensValue[1]}</td>
+          </tr>
+        </table>
+
+        </div>
+
       </div>
 
     );
