@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 import "./TronLinkInfo.scss";
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 export default class TronLinkInfo extends Component {
   constructor(props) {
@@ -10,16 +12,20 @@ export default class TronLinkInfo extends Component {
       accountAddress: "account address will show up here",
       accountBalance: "account balance will show up here",
       accountBandwidth: "account bandwidth will show up here",
-      accountTokensValue: "account tokens will show up here"
+      accountTokensValue: "account tokens will show up here",
+      accountTokensName: "accout tokens name will show up here",
+      accountNumberOfTokens: "account total no. of tokens"
     };
   }
 
   // Uncomment each call one at a time to see your account information filled out
   componentDidMount() {
-    this.fetchAccountAddress();
-    this.fetchAccountBalance();
-    this.fetchAccountBandwidth();
-    this.getTokensBalance();
+    var promise1 = this.fetchAccountAddress();
+    var promise2 = this.fetchAccountBalance();
+    var promise3 = this.fetchAccountBandwidth();
+    var promise4 = this.getTokensBalance();
+    //Promise.all([promise1,promise2,promise3]);
+
   }
 
   // // The function below will return an object with address, balance, create_time,
@@ -66,34 +72,34 @@ export default class TronLinkInfo extends Component {
       let info = await window.tronWeb.trx.getAccount();
       var tokenQuantityHistory = 0;
       var tokenQuantityPositiveBalance = 0;
-      const btt_address = '1002000';
-      //var fs = require('fs');
-      //var fd = fs.openSync('Books.txt', 'w');
 
 
-      //var obj = JSON.parse(info);
-     // console.log(info); //DEbug
+    //  console.log(info); //DEbug
       tokenQuantityHistory = info.assetV2.length;
       //console.log("Number of tokens: " + tokenQuantityHistory);
 
       for(i = 0; i <tokenQuantityHistory; i++)
       {
-  	if(info.assetV2[i].value > 0)  //Ignore assets with 0 banlance
-  	{
-  	    tokenQuantityPositiveBalance ++; //Getting total amount of tokens with positive balance
-  	    tokenIDs[i] = info.assetV2[i].key;  //Taking token IDs
-  	    books =  await window.tronWeb.trx.getTokenFromID(tokenIDs[i]);
-  	    tokenName[i] = books.name;
-  	    tokenValue[i] = info.assetV2[i].value/1000000; //Taking token values(Number of books per token)
-  	    console.log(tokenIDs[i] + " " + tokenName[i] + " = "+ tokenValue[i]);  //Debug sentence
-
-  	}
-
+      	if(info.assetV2[i].value > 0)  //Ignore assets with 0 banlance
+      	{
+      	    tokenQuantityPositiveBalance ++; //Getting total amount of tokens with positive balance
+      	    tokenIDs[i] = info.assetV2[i].key;  //Taking token IDs
+      	    books =  await window.tronWeb.trx.getTokenFromID(tokenIDs[i]);
+            //console.log(books);
+      	    tokenName[i] = books.name;
+      	    tokenValue[i] = info.assetV2[i].value/Math.pow(10,books.precision); //Taking token values(Number of books per token)
+      	    console.log(tokenIDs[i] + " " + tokenName[i] + " = "+ tokenValue[i]);  //Debug sentence
+      	}
       }
-   //fs.closeSync(fd);
+
+      let booksjson = require("../bookList/books.json");
+      console.log(booksjson.tokenId[1]);
+
 
    this.setState({
-     accountTokensValue: tokenValue
+     accountTokensValue: tokenValue,
+     accountTokensName: tokenName,
+     accountNumberOfTokens: tokenQuantityPositiveBalance
      });
        console.log("Number of tokens with positive balance: " + tokenQuantityPositiveBalance);
 
@@ -101,8 +107,9 @@ export default class TronLinkInfo extends Component {
 
 
 
+
   render() {
-    const { accountAddress, accountBalance, accountBandwidth,accountTokensValue } = this.state;
+    const { accountAddress, accountBalance, accountBandwidth,accountTokensValue, accountTokensName,accountNumberOfTokens } = this.state;
     return (
 
       <div className="tronLinkInfo-component-container">
@@ -121,24 +128,29 @@ export default class TronLinkInfo extends Component {
         <div className="account-info-tokens">
 
           List of Books:
-          <table>
-          <tr>
-            <th>Book Name</th>
-            <th>Quantity</th>
-          </tr>
-          <tr>
-            <td>Bittorrent</td>
-            <td>{accountTokensValue[0]}</td>
-          </tr>
-          <tr>
-            <td>CABBY</td>
-            <td>{accountTokensValue[1]}</td>
-          </tr>
-        </table>
-
+          </div>
+        <ButtonGroup
+      orientation="vertical"
+      color="primary"
+      aria-label="vertical outlined primary button group"
+    >
+      {accountNumberOfTokens >= 1?(<Button
+        href="https://gateway.btfssoter.io/btfs/QmaV8AHcxkFre75JZADTmnpHdyaYLd6L3BE4eh8nJDPmiC"
+        >{accountTokensName[0]}:{accountTokensValue[0]}</Button>):null}
+      {accountNumberOfTokens >= 2?(<Button>{accountTokensName[1]}:{accountTokensValue[1]}</Button>):null}
+      {accountNumberOfTokens >= 3?(<Button>{accountTokensName[2]}:{accountTokensValue[2]}</Button>):null}
+      {accountNumberOfTokens >= 4?(<Button>{accountTokensName[3]}:{accountTokensValue[3]}</Button>):null}
+      {accountNumberOfTokens >= 5?(<Button>{accountTokensName[4]}:{accountTokensValue[4]}</Button>):null}
+      {accountNumberOfTokens >= 6?(<Button>{accountTokensName[5]}:{accountTokensValue[5]}</Button>):null}
+      {accountNumberOfTokens >= 7?(<Button>{accountTokensName[6]}:{accountTokensValue[6]}</Button>):null}
+      {accountNumberOfTokens >= 8?(<Button>{accountTokensName[7]}:{accountTokensValue[7]}</Button>):null}
+      {accountNumberOfTokens >= 9?(<Button>{accountTokensName[8]}:{accountTokensValue[8]}</Button>):null}
+      {accountNumberOfTokens >= 10?(<Button>{accountTokensName[9]}:{accountTokensValue[9]}</Button>):null}
+      {accountNumberOfTokens >= 11?(<Button>{accountTokensName[10]}:{accountTokensValue[10]}</Button>):null}
+    </ButtonGroup>
         </div>
 
-      </div>
+
 
     );
   }

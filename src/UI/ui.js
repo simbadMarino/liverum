@@ -15,17 +15,11 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import BookIcon from '@material-ui/icons/Book';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import TuneIcon from '@material-ui/icons/Tune';
 import TronLinkInfo from "../components/TronLinkInfo";
-import TronLinkGuide from "../components/TronLinkGuide";
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import StorefrontIcon from '@material-ui/icons/Storefront';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import LiverumLibrary from "../components/Library/library.js";
 const drawerWidth = 200;
 
@@ -206,8 +200,8 @@ export default function PersistentDrawerLeft() {
       >
         <div className={classes.drawerHeader} />
 
-        
-        {selectedIndex==0 ?(<TronLinkInfo/>): selectedIndex==1 ? (<LiverumLibrary/>): null}
+
+        {selectedIndex===0 ?(<TronLinkInfo/>): selectedIndex===1 ? (<LiverumLibrary/>): null}
 
       </main>
     </div>

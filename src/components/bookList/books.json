@@ -1,0 +1,8 @@
+{
+"name_spa":["El Conde de Montecristo","Robinson Crusoe","Metamorfosis","Guerra de los Mundos","El principe y el Mendigo","Viaje al centro de la tierra"],
+"name_eng":["The Count of Montecristo", "Robinson Crusoe","The Methamorphosis","The war of the Worlds","The Prince and the Pauper", "Journey to the Center of the Earth"],
+"tokenId":["1002544","1002672","1002721","1002736","1002775","1002798"],
+"author":["Alexandre Dumas", "Daniel Defoe", "Franz Kafka","H.G. Wells","Mark Twain","Jules Verne"],
+"publisher":["Liverum Books","Liverum Books","Liverum Books","Liverum Books","Liverum Books","Liverum Books"],
+"btfs_link":["https://gateway.btfssoter.io/btfs/QmQb9yp7FSAXzZQr79Ew5kPBNS84fU4XxzfEi83BydyaM9","https://gateway.btfssoter.io/btfs/QmaV8AHcxkFre75JZADTmnpHdyaYLd6L3BE4eh8nJDPmiC"]
+}

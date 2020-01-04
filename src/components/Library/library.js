@@ -19,7 +19,7 @@ const storage = global.localStorage || null;
 
 
 
-class LiverumLibrary extends Component {
+  class LiverumLibrary extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -99,7 +99,7 @@ class LiverumLibrary extends Component {
           />
 
         </ReaderContainer>
-    
+
     );
   }
 }
