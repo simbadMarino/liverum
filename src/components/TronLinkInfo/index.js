@@ -20,10 +20,10 @@ export default class TronLinkInfo extends Component {
 
   // Uncomment each call one at a time to see your account information filled out
   componentDidMount() {
-    var promise1 = this.fetchAccountAddress();
-    var promise2 = this.fetchAccountBalance();
-    var promise3 = this.fetchAccountBandwidth();
-    var promise4 = this.getTokensBalance();
+    this.fetchAccountAddress();
+    this.fetchAccountBalance();
+    this.fetchAccountBandwidth();
+    this.getTokensBalance();
     //Promise.all([promise1,promise2,promise3]);
 
   }
@@ -134,9 +134,7 @@ export default class TronLinkInfo extends Component {
       color="primary"
       aria-label="vertical outlined primary button group"
     >
-      {accountNumberOfTokens >= 1?(<Button
-        href="https://gateway.btfssoter.io/btfs/QmaV8AHcxkFre75JZADTmnpHdyaYLd6L3BE4eh8nJDPmiC"
-        >{accountTokensName[0]}:{accountTokensValue[0]}</Button>):null}
+      {accountNumberOfTokens >= 1?(<Button>{accountTokensName[0]}:{accountTokensValue[0]}</Button>):null}
       {accountNumberOfTokens >= 2?(<Button>{accountTokensName[1]}:{accountTokensValue[1]}</Button>):null}
       {accountNumberOfTokens >= 3?(<Button>{accountTokensName[2]}:{accountTokensValue[2]}</Button>):null}
       {accountNumberOfTokens >= 4?(<Button>{accountTokensName[3]}:{accountTokensValue[3]}</Button>):null}

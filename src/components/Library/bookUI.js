@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import 'typeface-roboto'; //Importing roboto font
-import Button from '@material-ui/core/Button';  //Importing material button
+import 'typeface-roboto';                             //Importing roboto font
+import Button from '@material-ui/core/Button';        //Importing material button
 import Utils from "../../utils";
-//import "./App.scss";
 import { createGlobalStyle } from "styled-components";
 import { ReactReader } from "../../modules";
 import {
@@ -14,12 +13,14 @@ import {
   CloseIcon,
   FontSizeButton
 } from "../../Components";
+//import {bookURL} from "./libraryUI.js"
+
+
 var title = "";
 const storage = global.localStorage || null;
 
 
-
-  class LiverumLibrary extends Component {
+  class LiverumBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -85,23 +86,24 @@ const storage = global.localStorage || null;
 
   render() {
     const { fullscreen, location } = this.state;
+
     return (
 
-        <ReaderContainer fullscreen={fullscreen}>
-          <ReactReader
-            url={
-              "https://gateway.btfssoter.io/btfs/QmZVMJXP4o7QRHFHpqECbjwewJXHFHG46T5wrroL7tK6iM/Montecristo.epub"
-            }
-            locationChanged={this.onLocationChanged}
-            title={"El Conde de Montecristo"}
-            location={location}
-            getRendition={this.getRendition}
-          />
+      <ReaderContainer fullscreen={fullscreen}>
+        <ReactReader
+          url={
+            this.props.bookUrl
+          }
+          locationChanged={this.onLocationChanged}
+          title={this.props.bookTitle}
+          location={location}
+          getRendition={this.getRendition}
+        />
 
-        </ReaderContainer>
+      </ReaderContainer>
 
     );
   }
 }
 
-export default LiverumLibrary;
+export default LiverumBook;

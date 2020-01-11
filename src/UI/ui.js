@@ -20,7 +20,8 @@ import TuneIcon from '@material-ui/icons/Tune';
 import TronLinkInfo from "../components/TronLinkInfo";
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import StorefrontIcon from '@material-ui/icons/Storefront';
-import LiverumLibrary from "../components/Library/library.js";
+import LiverumBook from "../components/Library/bookUI.js";
+import TitlebarGridList from "../components/Library/libraryUI.js";
 const drawerWidth = 200;
 
 const useStyles = makeStyles(theme => ({
@@ -93,7 +94,7 @@ export default function PersistentDrawerLeft() {
   };
 
 
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
     const handleListItemClick = (event, index) => {
       setSelectedIndex(index);
@@ -201,7 +202,7 @@ export default function PersistentDrawerLeft() {
         <div className={classes.drawerHeader} />
 
 
-        {selectedIndex===0 ?(<TronLinkInfo/>): selectedIndex===1 ? (<LiverumLibrary/>): null}
+        {selectedIndex===0 ?(<TronLinkInfo/>): selectedIndex===1 ? (<TitlebarGridList/>): null}
 
       </main>
     </div>
