@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import 'typeface-roboto';                             //Importing roboto font
-import Button from '@material-ui/core/Button';        //Importing material button
-import Utils from "../../utils";
-import { createGlobalStyle } from "styled-components";
+//import Button from '@material-ui/core/Button';        //Importing material button
+//import Utils from "../../utils";
+//import { createGlobalStyle } from "styled-components";
 import { ReactReader } from "../../modules";
 import {
   Container,

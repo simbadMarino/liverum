@@ -9,6 +9,8 @@ import MenuBook from '@material-ui/icons/MenuBook'
 import {tileData} from './bookList.js';
 import { makeStyles } from '@material-ui/core/styles';
 import LiverumBook from './bookUI'
+import {tokenIDs} from '../TronLinkInfo/index.js'
+import {tileDataMod} from '../TronLinkInfo/index.js'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,29 +33,47 @@ export var bookTitle = '';
 
 
 export default function TitlebarGridList() {
-  const classes = useStyles();
 
+  const classes = useStyles();
+ //window.alert(tokenIDs);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   var selected ='';
 
   const handleListItemClick = (event, tokenId, url, title) => {
     setSelectedIndex(tokenId);
-    console.log(tokenId);
+    //console.log(tokenId);
     bookURL = url;
     bookTitle = title;
-    console.log(bookTitle);
-    console.log(bookURL);
+    //console.log(bookTitle);
+    //console.log(bookURL);
+
+    //  var foundID =  tokenIDs.findIndex(getTokens)
+    //  console.log(foundID)
   };
 
 
 
+/*function getTokens(ids,index,tokenIDs)
+{
+
+  if(index<tileData.length)
+  {
+  var counter = index;
+  console.log("[" + index + "]" + "Token from blockchain: " + ids)
+  console.log("token from book database: " + tileData[counter].tokenid);
+  }
+  console.log("Token to compare: " + counter)
+  return ids == tileData[counter].tokenid;
+}*/
+
   return (
+
     <div className={classes.root}>
       <GridList cellHeight={380} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} rows={2} style={{ height: 'auto' }}>
           <ListSubheader component="div">Available Books:</ListSubheader>
         </GridListTile>
-        {tileData.map(tile => (
+        {tileDataMod.map(tile => (
           <GridListTile key={tile.img}>
             <img src={tile.img} alt={tile.title} />
             <GridListTileBar
@@ -71,8 +91,8 @@ export default function TitlebarGridList() {
           </GridListTile>
         ))}
       </GridList>
-      {selectedIndex==='1002544' ?(<LiverumBook bookUrl={bookURL} bookTitle={bookTitle}/>): null}
-      {selectedIndex==='1002672' ?(<LiverumBook bookUrl={bookURL} bookTitle={bookTitle}/>): null}
+      
+
     </div>
 
   );

@@ -3,7 +3,33 @@ import React, { Component } from "react";
 import "./TronLinkInfo.scss";
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+//import TitlebarGridList from "../Library/libraryUI.js";
+import {tileData} from '../Library/bookList.js';
 
+export var tokenIDs = [];
+export var tileDataMod = [];
+var j = 0;
+
+async function myFunction(item,index)
+{
+  //console.log(index + "= " + item.tokenid);
+  
+  //console.log("Token IDs: " + tokenIDs);
+  for(var i=0;i<tokenIDs.length;i++)
+  {
+    if(tokenIDs[i] == item.tokenid)
+    {
+
+      console.log("match in: " + i + " " + j);
+      tileDataMod[j] = tileData[index];
+      console.log("Token ID: " + tokenIDs[i]);
+      j++;
+    }
+      //console.log("Counter " + i);
+  }
+//  j = 0;
+
+}
 export default class TronLinkInfo extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +40,8 @@ export default class TronLinkInfo extends Component {
       accountBandwidth: "account bandwidth will show up here",
       accountTokensValue: "account tokens will show up here",
       accountTokensName: "accout tokens name will show up here",
-      accountNumberOfTokens: "account total no. of tokens"
+      accountNumberOfTokens: "account total no. of tokens",
+      accountTokenIds: "accout tokens"
     };
   }
 
@@ -24,6 +51,7 @@ export default class TronLinkInfo extends Component {
     this.fetchAccountBalance();
     this.fetchAccountBandwidth();
     this.getTokensBalance();
+    //this.myFunction();
     //Promise.all([promise1,promise2,promise3]);
 
   }
@@ -65,7 +93,7 @@ export default class TronLinkInfo extends Component {
   async getTokensBalance() {
       //const WALLET_ADDRESS = 'TRxrmHDysqAMHNo2eEtSvcMoJpDnWLqnZ4';
       var tokenName = [];
-      var tokenIDs = [];
+
       var books;
       var i;
       var tokenValue = [];
@@ -74,7 +102,7 @@ export default class TronLinkInfo extends Component {
       var tokenQuantityPositiveBalance = 0;
 
 
-    //  console.log(info); //DEbug
+      //console.log(info); //DEbug
       tokenQuantityHistory = info.assetV2.length;
       //console.log("Number of tokens: " + tokenQuantityHistory);
 
@@ -91,17 +119,32 @@ export default class TronLinkInfo extends Component {
       	    console.log(tokenIDs[i] + " " + tokenName[i] + " = "+ tokenValue[i]);  //Debug sentence
       	}
       }
+      tokenIDs = tokenIDs.filter(function (el) {
+                return el != null;
+            });
 
-      let booksjson = require("../bookList/books.json");
-      console.log(booksjson.tokenId[1]);
+      tokenName = tokenName.filter(function (el) {
+                return el != null;
+            });
+
+      tokenValue = tokenValue.filter(function (el) {
+                return el != null;
+            });
+
+      //let booksjson = require("../bookList/books.json");
+    console.log(tokenIDs);
+    tileData.forEach(myFunction);
+      console.log(tileDataMod);
+      //console.log(booksjson.tokenId[1]);
 
 
    this.setState({
      accountTokensValue: tokenValue,
      accountTokensName: tokenName,
-     accountNumberOfTokens: tokenQuantityPositiveBalance
+     accountNumberOfTokens: tokenQuantityPositiveBalance,
+     accountTokenIds : tokenIDs
      });
-       console.log("Number of tokens with positive balance: " + tokenQuantityPositiveBalance);
+       //console.log("Number of tokens with positive balance: " + tokenQuantityPositiveBalance);
 
   }
 
@@ -109,7 +152,7 @@ export default class TronLinkInfo extends Component {
 
 
   render() {
-    const { accountAddress, accountBalance, accountBandwidth,accountTokensValue, accountTokensName,accountNumberOfTokens } = this.state;
+    const { accountAddress, accountBalance, accountBandwidth,accountTokensValue, accountTokensName,accountNumberOfTokens,accountTokenIds } = this.state;
     return (
 
       <div className="tronLinkInfo-component-container">
@@ -145,6 +188,7 @@ export default class TronLinkInfo extends Component {
       {accountNumberOfTokens >= 9?(<Button>{accountTokensName[8]}:{accountTokensValue[8]}</Button>):null}
       {accountNumberOfTokens >= 10?(<Button>{accountTokensName[9]}:{accountTokensValue[9]}</Button>):null}
       {accountNumberOfTokens >= 11?(<Button>{accountTokensName[10]}:{accountTokensValue[10]}</Button>):null}
+
     </ButtonGroup>
         </div>
 
