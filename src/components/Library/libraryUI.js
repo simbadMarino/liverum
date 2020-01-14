@@ -91,7 +91,11 @@ export default function TitlebarGridList() {
           </GridListTile>
         ))}
       </GridList>
-      
+      {selectedIndex==='1002544' ?(<LiverumBook bookUrl={bookURL} bookTitle={bookTitle}/>): null}
+      {selectedIndex==='1002672' ?(<LiverumBook bookUrl={bookURL} bookTitle={bookTitle}/>): null}
+      {selectedIndex==='1002721' ?(<LiverumBook bookUrl={bookURL} bookTitle={bookTitle}/>): null}
+      {selectedIndex==='1002736' ?(<LiverumBook bookUrl={bookURL} bookTitle={bookTitle}/>): null}
+
 
     </div>
 

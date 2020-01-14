@@ -12,22 +12,18 @@ var j = 0;
 
 async function myFunction(item,index)
 {
-  //console.log(index + "= " + item.tokenid);
-  
-  //console.log("Token IDs: " + tokenIDs);
+
   for(var i=0;i<tokenIDs.length;i++)
   {
     if(tokenIDs[i] == item.tokenid)
     {
-
       console.log("match in: " + i + " " + j);
       tileDataMod[j] = tileData[index];
       console.log("Token ID: " + tokenIDs[i]);
       j++;
     }
-      //console.log("Counter " + i);
   }
-//  j = 0;
+
 
 }
 export default class TronLinkInfo extends Component {
@@ -113,15 +109,15 @@ export default class TronLinkInfo extends Component {
       	    tokenQuantityPositiveBalance ++; //Getting total amount of tokens with positive balance
       	    tokenIDs[i] = info.assetV2[i].key;  //Taking token IDs
       	    books =  await window.tronWeb.trx.getTokenFromID(tokenIDs[i]);
-            //console.log(books);
+            console.log(books);
       	    tokenName[i] = books.name;
       	    tokenValue[i] = info.assetV2[i].value/Math.pow(10,books.precision); //Taking token values(Number of books per token)
       	    console.log(tokenIDs[i] + " " + tokenName[i] + " = "+ tokenValue[i]);  //Debug sentence
       	}
       }
-      tokenIDs = tokenIDs.filter(function (el) {
+      /*tokenIDs = tokenIDs.filter(function (el) {
                 return el != null;
-            });
+            });*/
 
       tokenName = tokenName.filter(function (el) {
                 return el != null;
@@ -133,8 +129,11 @@ export default class TronLinkInfo extends Component {
 
       //let booksjson = require("../bookList/books.json");
     console.log(tokenIDs);
+
+
     tileData.forEach(myFunction);
-      console.log(tileDataMod);
+    j=0;
+    console.log(tileDataMod);
       //console.log(booksjson.tokenId[1]);
 
 
