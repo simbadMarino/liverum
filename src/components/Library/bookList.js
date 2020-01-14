@@ -1,7 +1,7 @@
-import cover_montecristo from './liverum_covers/montecristo_cover.png';
-import cover_robinson_crusoe from './liverum_covers/RobinsonCrusoeCover.png';
-import cover_metamorfosis from './liverum_covers/Metamorphosis.png';
-import cover_arabiannights from './liverum_covers/milunanoches_cover.png';
+import cover_montecristo from './liverum_covers/montecristo_cover.jpg';
+import cover_robinson_crusoe from './liverum_covers/RobinsonCrusoeCover.jpg';
+import cover_metamorfosis from './liverum_covers/Metamorphosis.jpg';
+import cover_arabiannights from './liverum_covers/milunanoches_cover.jpg';
 
 export const tileData = [
    {
