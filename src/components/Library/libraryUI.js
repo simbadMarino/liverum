@@ -75,7 +75,9 @@ export default function TitlebarGridList() {
         </GridListTile>
         {tileDataMod.map(tile => (
           <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
+            <img src={tile.img}
+              onClick={event => handleListItemClick(event, tile.tokenid, tile.url, tile.title )}
+            />
             <GridListTileBar
               title={tile.title}
               subtitle={<span>by: {tile.author}</span>}

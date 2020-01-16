@@ -18,10 +18,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import TuneIcon from '@material-ui/icons/Tune';
 import TronLinkInfo from "../components/TronLinkInfo";
+import RecipeReviewCard from "../components/Store/Store";
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 //import LiverumBook from "../components/Library/bookUI.js";
 import TitlebarGridList from "../components/Library/libraryUI.js";
+import HomeIcon from '@material-ui/icons/Home';
 const drawerWidth = 200;
 
 const useStyles = makeStyles(theme => ({
@@ -150,10 +152,10 @@ export default function PersistentDrawerLeft() {
          onClick={event => handleListItemClick(event, 0)}
        >
          <ListItemIcon>
-           <AccountBalanceWalletIcon />
+           <HomeIcon />
 
          </ListItemIcon>
-         <ListItemText primary="Account" />
+         <ListItemText primary="Home" />
        </ListItem>
        <ListItem
          button
@@ -202,7 +204,7 @@ export default function PersistentDrawerLeft() {
         <div className={classes.drawerHeader} />
 
 
-        {selectedIndex===0 ?(<TronLinkInfo/>): selectedIndex===1 ? (<TitlebarGridList/>): null}
+        {selectedIndex===0 ?(<TronLinkInfo/>): selectedIndex===1 ? (<TitlebarGridList/>): selectedIndex===2 ? (<RecipeReviewCard/>): null}
 
       </main>
     </div>

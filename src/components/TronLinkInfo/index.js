@@ -162,16 +162,14 @@ export default class TronLinkInfo extends Component {
           Address: <span>{accountAddress}</span>
         </div>
         <div className="account-info-balance">
-          Balance: <span>{accountBalance}</span>
+          TRON Balance: <span>{accountBalance}</span>
         </div>
         <div className="account-info-bandwidth">
           Bandwidth: <span>{accountBandwidth}</span>
         </div>
         <div className="account-info-tokens">
-
-          List of Books:
           </div>
-        <ButtonGroup
+        {/*<ButtonGroup
       orientation="vertical"
       color="primary"
       aria-label="vertical outlined primary button group"
@@ -187,8 +185,8 @@ export default class TronLinkInfo extends Component {
       {accountNumberOfTokens >= 9?(<Button>{accountTokensName[8]}:{accountTokensValue[8]}</Button>):null}
       {accountNumberOfTokens >= 10?(<Button>{accountTokensName[9]}:{accountTokensValue[9]}</Button>):null}
       {accountNumberOfTokens >= 11?(<Button>{accountTokensName[10]}:{accountTokensValue[10]}</Button>):null}
+    </ButtonGroup>*/}
 
-    </ButtonGroup>
         </div>
 
 

@@ -84,6 +84,7 @@ class App extends Component {
 
         if (!tronWebState.installed) {
           return tries++;
+          console.log("Retries: " + tries)
         }
 
         this.setState({
