@@ -24,6 +24,7 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 //import LiverumBook from "../components/Library/bookUI.js";
 import TitlebarGridList from "../components/Library/libraryUI.js";
 import HomeIcon from '@material-ui/icons/Home';
+import liverumLogo from '../components/files/LiverumLogo.png'
 const drawerWidth = 200;
 
 const useStyles = makeStyles(theme => ({
@@ -126,7 +127,9 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h3" noWrap>
+          <img src={liverumLogo} width ="50" height="50" />
             Liverum
+
           </Typography>
         </Toolbar>
       </AppBar>
@@ -156,6 +159,7 @@ export default function PersistentDrawerLeft() {
 
          </ListItemIcon>
          <ListItemText primary="Home" />
+
        </ListItem>
        <ListItem
          button

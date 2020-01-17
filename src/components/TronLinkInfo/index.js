@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-
+import Divider from '@material-ui/core/Divider';
 import "./TronLinkInfo.scss";
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 //import TitlebarGridList from "../Library/libraryUI.js";
 import {tileData} from '../Library/bookList.js';
-
+import liverumLogo from '../files/LiverumLogo.png'
+import MediaCard from '../LiverumIntroHome/intro.js'
 export var tokenIDs = [];
 export var tileDataMod = [];
 var j = 0;
+
 
 async function myFunction(item,index)
 {
@@ -155,8 +157,10 @@ export default class TronLinkInfo extends Component {
     return (
 
       <div className="tronLinkInfo-component-container">
+        <MediaCard/>
+        <Divider />
         <div className="account-info-header">
-        TRON-Liverum Account
+        Liverum Account
         </div>
         <div className="account-info-address">
           Address: <span>{accountAddress}</span>
@@ -169,25 +173,7 @@ export default class TronLinkInfo extends Component {
         </div>
         <div className="account-info-tokens">
           </div>
-        {/*<ButtonGroup
-      orientation="vertical"
-      color="primary"
-      aria-label="vertical outlined primary button group"
-    >
-      {accountNumberOfTokens >= 1?(<Button>{accountTokensName[0]}:{accountTokensValue[0]}</Button>):null}
-      {accountNumberOfTokens >= 2?(<Button>{accountTokensName[1]}:{accountTokensValue[1]}</Button>):null}
-      {accountNumberOfTokens >= 3?(<Button>{accountTokensName[2]}:{accountTokensValue[2]}</Button>):null}
-      {accountNumberOfTokens >= 4?(<Button>{accountTokensName[3]}:{accountTokensValue[3]}</Button>):null}
-      {accountNumberOfTokens >= 5?(<Button>{accountTokensName[4]}:{accountTokensValue[4]}</Button>):null}
-      {accountNumberOfTokens >= 6?(<Button>{accountTokensName[5]}:{accountTokensValue[5]}</Button>):null}
-      {accountNumberOfTokens >= 7?(<Button>{accountTokensName[6]}:{accountTokensValue[6]}</Button>):null}
-      {accountNumberOfTokens >= 8?(<Button>{accountTokensName[7]}:{accountTokensValue[7]}</Button>):null}
-      {accountNumberOfTokens >= 9?(<Button>{accountTokensName[8]}:{accountTokensValue[8]}</Button>):null}
-      {accountNumberOfTokens >= 10?(<Button>{accountTokensName[9]}:{accountTokensValue[9]}</Button>):null}
-      {accountNumberOfTokens >= 11?(<Button>{accountTokensName[10]}:{accountTokensValue[10]}</Button>):null}
-    </ButtonGroup>*/}
-
-        </div>
+      </div>
 
 
 
