@@ -38,9 +38,7 @@ export default function MediaCard() {
             This is your home page to a new way of owning your favorite digital books,
             Liverum is all about bringing True Book reading experience to the digital world.
             Buy, sell, lend and gift your books securely and piracy free.
-              <Typography variant="subtitle2" color="initial" component="p">
               Built on TRON blockchain.
-              </Typography>
           </Typography>
         </CardContent>
       </CardActionArea>

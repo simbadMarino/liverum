@@ -24,7 +24,22 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 //import LiverumBook from "../components/Library/bookUI.js";
 import TitlebarGridList from "../components/Library/libraryUI.js";
 import HomeIcon from '@material-ui/icons/Home';
+import CallReceivedIcon from '@material-ui/icons/CallReceived';
+import SendIcon from '@material-ui/icons/Send';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import Button from '@material-ui/core/Button';
+import ShareIcon from '@material-ui/icons/Share';
+import {tronAddress} from "../components/TronLinkInfo"
+import QRcodeReader from "../components/qrcodeReader/codeReader.js"
 import liverumLogo from '../components/files/LiverumLogo.png'
+//import QRcode from '../components/receiveBooks/qrcode_gen.js
+
+var QRCode = require('qrcode.react');
 const drawerWidth = 200;
 
 const useStyles = makeStyles(theme => ({
@@ -171,6 +186,7 @@ export default function PersistentDrawerLeft() {
          </ListItemIcon>
          <ListItemText primary="Library" />
        </ListItem>
+
        <ListItem
          button
          selected={selectedIndex === 2}
@@ -182,13 +198,35 @@ export default function PersistentDrawerLeft() {
          <ListItemText primary="Liverum Store" />
        </ListItem>
 
+       <ListItem
+         button
+         selected={selectedIndex === 3}
+         onClick={event => handleListItemClick(event, 3)}
+       >
+         <ListItemIcon>
+           <CallReceivedIcon />
+         </ListItemIcon>
+         <ListItemText primary="Receive Books" />
+       </ListItem>
+
+       <ListItem
+         button
+         selected={selectedIndex === 4}
+         onClick={event => handleListItemClick(event, 4)}
+       >
+         <ListItemIcon>
+           <SendIcon />
+         </ListItemIcon>
+         <ListItemText primary="Send Books" />
+       </ListItem>
+
      </List>
      <Divider />
         <List component="nav" aria-label="secondary liverum menus">
         <ListItem
           button
-          selected={selectedIndex === 3}
-          onClick={event => handleListItemClick(event, 3)}
+          selected={selectedIndex === 5}
+          onClick={event => handleListItemClick(event, 5)}
         >
           <ListItemIcon>
             <TuneIcon />
@@ -208,7 +246,30 @@ export default function PersistentDrawerLeft() {
         <div className={classes.drawerHeader} />
 
 
-        {selectedIndex===0 ?(<TronLinkInfo/>): selectedIndex===1 ? (<TitlebarGridList/>): selectedIndex===2 ? (<RecipeReviewCard/>): null}
+        {selectedIndex===0 ?(<TronLinkInfo/>)
+          : selectedIndex===1 ? (<TitlebarGridList/>)
+          : selectedIndex===2 ? (<RecipeReviewCard/>)
+          : selectedIndex===3 ? (
+            <Card className={classes.card}>
+              <CardActionArea>
+                <QRCode value= {tronAddress} size={256} includeMargin = "true"/>
+
+              </CardActionArea>
+
+              <CardActions>
+                <Button size="small" color="default" >
+                  <FileCopyIcon/>
+                </Button>
+
+                <Button size="small" color="default" >
+                  <ShareIcon/>
+                </Button>
+              </CardActions>
+
+            </Card>)
+
+          : selectedIndex===4 ? (<QRcodeReader/>)
+          :   null}
 
       </main>
     </div>

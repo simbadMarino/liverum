@@ -9,6 +9,7 @@ import liverumLogo from '../files/LiverumLogo.png'
 import MediaCard from '../LiverumIntroHome/intro.js'
 export var tokenIDs = [];
 export var tileDataMod = [];
+export var tronAddress = "";
 var j = 0;
 
 
@@ -62,7 +63,7 @@ export default class TronLinkInfo extends Component {
     const accountAddressInBase58 = window.tronWeb.address.fromHex(
    accountAddress
      ); // Base58
-
+     tronAddress = accountAddressInBase58;
     this.setState({
       accountAddress: accountAddressInBase58
     });
