@@ -252,7 +252,7 @@ export default function PersistentDrawerLeft() {
           : selectedIndex===3 ? (
             <Card className={classes.card}>
               <CardActionArea>
-                <QRCode value= {tronAddress} size={256} includeMargin = "true"/>
+                <QRCode value= {tronAddress} size={256} />
 
               </CardActionArea>
 

@@ -26,7 +26,7 @@ const TronLinkGuide = props => {
                 <div className='info'>
                     <h1>TronLink Required</h1>
                     <p>
-                        To create a post or tip others you must install TronLink. TronLink is a TRON wallet for the browser
+                        In order to see your books you must install TronLink. TronLink is a TRON wallet for the browser
                         that can be <a href={ WEBSTORE_URL } target='_blank' rel='noopener noreferrer'>installed from the Chrome Webstore</a>.
                         Once installed, return back and refresh the page.
                     </p>

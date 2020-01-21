@@ -23,7 +23,7 @@ export default class QRcodeReader extends Component {
           delay={300}
           onError={this.handleError}
           onScan={this.handleScan}
-          style={{ width: '100%' }}
+          style={{ width: '30%' }}
         />
         <p>{this.state.result}</p>
       </div>

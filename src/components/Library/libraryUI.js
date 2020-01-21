@@ -11,6 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LiverumBook from './bookUI'
 import {tokenIDs} from '../TronLinkInfo/index.js'
 import {tileDataMod} from '../TronLinkInfo/index.js'
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
+    width: 'auto',
     height: 'auto',
   },
   icon: {
@@ -69,9 +70,10 @@ export default function TitlebarGridList() {
   return (
 
     <div className={classes.root}>
-      <GridList cellHeight={380} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={2} rows={2} style={{ height: 'auto' }}>
-          <ListSubheader component="div">Available Books:</ListSubheader>
+    <Container maxWidth="xs">
+      <GridList cellHeight={230} className={classes.gridList}>
+        <GridListTile key="Subheader" cols={2} rows={5} style={{ height: 'auto' }}>
+          <ListSubheader component="div"></ListSubheader>
         </GridListTile>
         {tileDataMod.map(tile => (
           <GridListTile key={tile.img}>
@@ -98,7 +100,7 @@ export default function TitlebarGridList() {
       {selectedIndex==='1002721' ?(<LiverumBook bookUrl={bookURL} bookTitle={bookTitle}/>): null}
       {selectedIndex==='1002736' ?(<LiverumBook bookUrl={bookURL} bookTitle={bookTitle}/>): null}
 
-
+</Container>
     </div>
 
   );
