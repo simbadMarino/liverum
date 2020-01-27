@@ -8,8 +8,20 @@ import Button from "@material-ui/core/Button";
 import BookExchange from "../files/bookExchange.png";
 import NumericInput from "react-numeric-input";
 import Divider from "@material-ui/core/Divider";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { tileDataMod } from "../TronLinkInfo/index.js";
+import TextField from "@material-ui/core/TextField";
+
+var bookToTransfer = "";
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2)
+    }
+  },
   button: {
     display: "block",
     marginTop: theme.spacing(2)
@@ -20,6 +32,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 export default function ControlledOpenSelect() {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
@@ -27,9 +43,21 @@ export default function ControlledOpenSelect() {
 
   const handleChange = event => {
     setAge(event.target.value);
+    console.log(event.target.value);
+    bookToTransfer = event.target.value;
+    console.log("Changing book");
   };
 
-  const handleClose = () => {
+  const handleClick = () => {
+    console.log(tileDataMod);
+    //tronWeb.transactionBuilder.sendToken(to, amount, tokenID, from, options);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
     setOpen(false);
   };
 
@@ -55,18 +83,33 @@ export default function ControlledOpenSelect() {
           value={age}
           onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Count of Montecristo</MenuItem>
-          <MenuItem value={20}>Robinson Crusoe</MenuItem>
-          <MenuItem value={30}>1001 Nights</MenuItem>
+          {tileDataMod.map(tile => (
+            <MenuItem value={tile.tokenid}>{tile.title}</MenuItem>
+          ))}
         </Select>
       </FormControl>
+      <TextField
+        id="filled-basic"
+        label="Token ID"
+        variant="filled"
+        value={bookToTransfer}
+      />
       <Divider />
-      <Button className={classes.button} onClick={handleOpen}>
-        Share Book
+      <TextField
+        id="filled-basic"
+        label="Receiver TRON Address"
+        variant="outlined"
+      />
+
+      <Button variant="outlined" onClick={handleClick}>
+        Share book
       </Button>
+
+      <Snackbar open_={open} autoHideDuration={6000} onClose_={handleClose}>
+        <Alert onClose_={handleClose} severity="success">
+          This is a success message!
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

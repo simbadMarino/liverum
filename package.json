@@ -48,6 +48,7 @@
   "dependencies": {
     "@material-ui/core": "^4.8.0",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.40",
     "epubjs": "^0.3.85",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
