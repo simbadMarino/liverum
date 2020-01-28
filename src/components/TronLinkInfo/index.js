@@ -137,7 +137,11 @@ export default class TronLinkInfo extends Component {
       accountNumberOfTokens: tokenQuantityPositiveBalance,
       accountTokenIds: tokenIDs
     });
-    //console.log("Number of tokens with positive balance: " + tokenQuantityPositiveBalance);
+
+    console.log(
+      "Number of tokens with positive balance: " + tokenQuantityPositiveBalance
+    );
+    //window.tronWeb.trx.sendToken("TYGajccn93oPPUvGfiueu8x7fMkVEPDgMB", 1000000, "1002736")
   }
 
   render() {

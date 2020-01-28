@@ -14,7 +14,7 @@ import { tileDataMod } from "../TronLinkInfo/index.js";
 import TextField from "@material-ui/core/TextField";
 
 var bookToTransfer = "";
-
+var addyToTransfer = "";
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -49,8 +49,13 @@ export default function ControlledOpenSelect() {
   };
 
   const handleClick = () => {
-    console.log(tileDataMod);
-    //tronWeb.transactionBuilder.sendToken(to, amount, tokenID, from, options);
+    //console.log(tileDataMod);
+    var transactionToken = window.tronWeb.trx.sendToken(
+      addyToTransfer,
+      1000000,
+      bookToTransfer
+    );
+    console.log(transactionToken);
   };
 
   const handleClose = (event, reason) => {
@@ -65,13 +70,15 @@ export default function ControlledOpenSelect() {
     setOpen(true);
   };
 
+  const handleChangeAddy = event => {
+    console.log(event.target.value);
+    addyToTransfer = event.target.value;
+  };
+
   return (
     <div>
       <img src={BookExchange} width="200" height="200" />
-
       <Divider />
-      <NumericInput min={1} max={100} mobile="auto" size={1} />
-
       <FormControl className={classes.formControl}>
         <InputLabel id="BookList">Select Book</InputLabel>
         <Select
@@ -89,16 +96,17 @@ export default function ControlledOpenSelect() {
         </Select>
       </FormControl>
       <TextField
-        id="filled-basic"
+        id="Txt_tokenid"
         label="Token ID"
         variant="filled"
         value={bookToTransfer}
       />
       <Divider />
       <TextField
-        id="filled-basic"
+        id="Txt_Addy"
         label="Receiver TRON Address"
         variant="outlined"
+        onChange={handleChangeAddy}
       />
 
       <Button variant="outlined" onClick={handleClick}>
@@ -113,3 +121,8 @@ export default function ControlledOpenSelect() {
     </div>
   );
 }
+
+/*  <Divider />
+  <NumericInput min={1} max={100} mobile="auto" size={1} />
+
+  */
