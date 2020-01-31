@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import TronWeb from "tronweb";
-import 'typeface-roboto'; //Importing roboto font
+//import TronWeb from "tronweb";
+import SunWeb from "sunweb";
+import "typeface-roboto"; //Importing roboto font
 //import Button from '@material-ui/core/Button';  //Importing material button
 import Utils from "./utils";
 import TronLinkInfo from "./components/TronLinkInfo";
@@ -22,7 +23,6 @@ var title = "";
 const storage = global.localStorage || null;
 
 const FOUNDATION_ADDRESS = "TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg";
-
 
 class App extends Component {
   constructor(props) {
@@ -63,11 +63,7 @@ class App extends Component {
         if (tries >= 10) {
           const TRONGRID_API = "https://api.trongrid.io";
 
-          window.tronWeb = new TronWeb(
-            TRONGRID_API,
-            TRONGRID_API,
-            TRONGRID_API
-          );
+          window.tronWeb = new SunWeb(TRONGRID_API, TRONGRID_API, TRONGRID_API);
 
           this.setState({
             tronWeb: {
@@ -84,7 +80,7 @@ class App extends Component {
 
         if (!tronWebState.installed) {
           return tries++;
-          console.log("Retries: " + tries)
+          console.log("Retries: " + tries);
         }
 
         this.setState({
@@ -171,13 +167,8 @@ class App extends Component {
     if (!this.state.tronWeb.loggedIn) return <TronLinkGuide installed />;
     const { fullscreen, location } = this.state;
     return (
-
-
-
       <Container>
-
-        <PersistentDrawerLeft/>
-
+        <PersistentDrawerLeft />
       </Container>
     );
   }

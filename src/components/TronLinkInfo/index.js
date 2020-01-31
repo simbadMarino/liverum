@@ -93,7 +93,7 @@ export default class TronLinkInfo extends Component {
     let info = await window.tronWeb.trx.getAccount();
     var tokenQuantityHistory = 0;
     var tokenQuantityPositiveBalance = 0;
-
+    //  window.alert("Wait until Book List update finishes...")
     //console.log(info); //DEbug
     tokenQuantityHistory = info.assetV2.length;
     //console.log("Number of tokens: " + tokenQuantityHistory);
@@ -142,6 +142,7 @@ export default class TronLinkInfo extends Component {
       "Number of tokens with positive balance: " + tokenQuantityPositiveBalance
     );
     //window.tronWeb.trx.sendToken("TYGajccn93oPPUvGfiueu8x7fMkVEPDgMB", 1000000, "1002736")
+    window.alert("Book list updated :)");
   }
 
   render() {

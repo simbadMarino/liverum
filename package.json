@@ -59,6 +59,7 @@
     "react-qr-reader": "^2.2.1",
     "react-scripts": "^2.1.8",
     "react-swipeable": "^5.4.0",
+    "sunweb": "^1.1.0",
     "sweetalert2": "^8.5.0",
     "tronweb": "^2.3.4",
     "typeface-roboto": "0.0.75"

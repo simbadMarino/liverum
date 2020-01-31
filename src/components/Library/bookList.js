@@ -1,35 +1,39 @@
-import cover_montecristo from './liverum_covers/montecristo_cover.jpg';
-import cover_robinson_crusoe from './liverum_covers/RobinsonCrusoeCover.jpg';
-import cover_metamorfosis from './liverum_covers/Metamorphosis.jpg';
-import cover_arabiannights from './liverum_covers/milunanoches_cover.jpg';
+import cover_montecristo from "./liverum_covers/montecristo_cover.jpg";
+import cover_robinson_crusoe from "./liverum_covers/RobinsonCrusoeCover.jpg";
+import cover_mysterious_island from "./liverum_covers/mystery_island.jpg";
+import cover_sherlock_holmes from "./liverum_covers/sherlock_cover.jpg";
 
 export const tileData = [
-   {
-     img: cover_montecristo,
-     title: 'Count of Montecristo',
-     author: 'Alexandre Dumas',
-     tokenid: '1002544',
-     url: 'https://gateway.btfssoter.io/btfs/QmZVMJXP4o7QRHFHpqECbjwewJXHFHG46T5wrroL7tK6iM/Montecristo.epub',
-   },
-   {
-     img: cover_robinson_crusoe,
-     title: 'Robinson Crusoe',
-     author: 'Daniel Defoe',
-     tokenid: '1002672',
-     url: 'https://gateway.btfssoter.io/btfs/QmdQ9pWT1fqpjroXc5Po4hFg6TQ7qWXrNvjfgLRGHxiAWt/Robinson%20Crusoe.epub',
-   },
-   {
-     img: cover_metamorfosis,
-     title: 'Methamorphosis',
-     author: 'Franz Kafka',
-     tokenid: '1002721',
-     url: 'https://gateway.btfssoter.io/btfs/QmZVMJXP4o7QRHFHpqECbjwewJXHFHG46T5wrroL7tK6iM/Montecristo.epub',
-   },
-   {
-     img: cover_arabiannights,
-     title: 'Arabian Nights',
-     author: 'Annonimous',
-     tokenid: '1002736',
-     url: 'https://gateway.btfssoter.io/btfs/QmZVMJXP4o7QRHFHpqECbjwewJXHFHG46T5wrroL7tK6iM/Montecristo.epub',
-   }
- ];
+  {
+    img: cover_montecristo,
+    title: "Count of Montecristo",
+    author: "Alexandre Dumas",
+    tokenid: "1002544",
+    url:
+      "https://gateway.btfssoter.io/btfs/QmZVMJXP4o7QRHFHpqECbjwewJXHFHG46T5wrroL7tK6iM/Montecristo.epub"
+  },
+  {
+    img: cover_robinson_crusoe,
+    title: "Robinson Crusoe",
+    author: "Daniel Defoe",
+    tokenid: "1002672",
+    url:
+      "https://gateway.btfssoter.io/btfs/QmdQ9pWT1fqpjroXc5Po4hFg6TQ7qWXrNvjfgLRGHxiAWt/Robinson%20Crusoe.epub"
+  },
+  {
+    img: cover_mysterious_island,
+    title: "Mysterious Island",
+    author: "Jules Verne",
+    tokenid: "1002721",
+    url:
+      "https://standardebooks.org/ebooks/jules-verne/the-mysterious-island/stephen-w-white/dist/jules-verne_the-mysterious-island.epub"
+  },
+  {
+    img: cover_sherlock_holmes,
+    title: "The Adventures of Sherlock Holmes",
+    author: "Arthur Connan Doyle",
+    tokenid: "1002736",
+    url:
+      "https://standardebooks.org/ebooks/arthur-conan-doyle/the-adventures-of-sherlock-holmes/dist/arthur-conan-doyle_the-adventures-of-sherlock-holmes.epub"
+  }
+];
