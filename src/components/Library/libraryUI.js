@@ -66,12 +66,13 @@ export default function TitlebarGridList() {
   return (
     <div className={classes.root}>
       <Container maxWidth="md">
-        <GridList cellHeight="auto" className={classes.gridList}>
+        <GridList cellHeight={600} className={classes.gridList}>
           <GridListTile
             key="Subheader"
             cols={2}
-            rows={5}
-            style={{ height: "auto" }}
+            rows={2}
+            spacing={5}
+            style={{ height: 50 }}
           >
             <ListSubheader component="div"></ListSubheader>
           </GridListTile>
@@ -87,16 +88,16 @@ export default function TitlebarGridList() {
             </GridListTile>
           ))}
         </GridList>
-        {selectedIndex === "1002544" ? (
+        {selectedIndex === "1002000" ? (
           <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
         ) : null}
-        {selectedIndex === "1002672" ? (
+        {selectedIndex === "1000001" ? (
           <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
         ) : null}
-        {selectedIndex === "1002721" ? (
+        {selectedIndex === "1002072" ? (
           <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
         ) : null}
-        {selectedIndex === "1002736" ? (
+        {selectedIndex === "1000322" ? (
           <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
         ) : null}
       </Container>

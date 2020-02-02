@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import TronWeb from "tronweb";
+import TronWeb from "tronweb";
 import SunWeb from "sunweb";
 import "typeface-roboto"; //Importing roboto font
 //import Button from '@material-ui/core/Button';  //Importing material button
@@ -61,9 +61,9 @@ class App extends Component {
 
       const timer = setInterval(() => {
         if (tries >= 10) {
-          const TRONGRID_API = "https://api.trongrid.io";
+          //const TRONGRID_API = "https://sun.tronex.io";
 
-          window.tronWeb = new SunWeb(TRONGRID_API, TRONGRID_API, TRONGRID_API);
+          //  window.tronWeb = new SunWeb("https://mainapi.trongrid.io",'https://sideapi.trongrid.io',"https://sun.tronex.io");
 
           this.setState({
             tronWeb: {

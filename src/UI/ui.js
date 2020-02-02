@@ -187,17 +187,6 @@ export default function PersistentDrawerLeft() {
 
           <ListItem
             button
-            selected={selectedIndex === 2}
-            onClick={event => handleListItemClick(event, 2)}
-          >
-            <ListItemIcon>
-              <StorefrontIcon />
-            </ListItemIcon>
-            <ListItemText primary="Liverum Store" />
-          </ListItem>
-
-          <ListItem
-            button
             selected={selectedIndex === 3}
             onClick={event => handleListItemClick(event, 3)}
           >
@@ -248,6 +237,19 @@ export default function PersistentDrawerLeft() {
 }
 
 /*
+
+
+<ListItem
+  button
+  selected={selectedIndex === 2}
+  onClick={event => handleListItemClick(event, 2)}
+>
+  <ListItemIcon>
+    <StorefrontIcon />
+  </ListItemIcon>
+  <ListItemText primary="Liverum Store" />
+</ListItem>
+
 <List component="nav" aria-label="secondary liverum menus">
 <ListItem
   button
@@ -274,4 +276,7 @@ export default function PersistentDrawerLeft() {
     <ShareIcon/>
   </Button>
 </CardActions>
+
+
+
 */

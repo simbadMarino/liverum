@@ -3,6 +3,8 @@ import Divider from "@material-ui/core/Divider";
 import "./TronLinkInfo.scss";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import TronWeb from "tronweb";
+import SunWeb from "sunweb";
 //import TitlebarGridList from "../Library/libraryUI.js";
 import { tileData } from "../Library/bookList.js";
 import liverumLogo from "../files/LiverumLogo.png";
@@ -12,6 +14,29 @@ export var tileDataMod = [];
 export var tokenQty = [];
 export var tronAddress = "";
 var j = 0;
+const mainGatewayAddress = "TWaPZru6PR5VjgT4sJrrZ481Zgp3iJ8Rfo";
+const sideGatewayAddress = "TGKotco6YoULzbYisTBuP6DWXDjEgJSpYz";
+const sideChainId = "41E209E4DE650F0150788E8EC5CAFA240A23EB8EB7";
+
+const mainchain = new TronWeb({
+  fullNode: "https://api.trongrid.io",
+  solidityNode: "https://api.trongrid.io",
+  eventServer: "https://api.trongrid.io"
+});
+
+const sidechain = new TronWeb({
+  fullNode: "https://sun.tronex.io",
+  solidityNode: "https://sun.tronex.io",
+  eventServer: "https://sun.tronex.io"
+});
+
+const sunWeb = new SunWeb(
+  mainchain,
+  sidechain,
+  mainGatewayAddress,
+  sideGatewayAddress,
+  sideChainId
+);
 
 async function myFunction(item, index) {
   for (var i = 0; i < tokenIDs.length; i++) {
@@ -52,9 +77,9 @@ export default class TronLinkInfo extends Component {
   // // The function below will return an object with address, balance, create_time,
   // // account_resource;
   async fetchAccountAddress() {
-    const account = await window.tronWeb.trx.getAccount();
+    const account = await window.sunWeb.sidechain.trx.getAccount();
     const accountAddress = account.address; // HexString(Ascii)
-    const accountAddressInBase58 = window.tronWeb.address.fromHex(
+    const accountAddressInBase58 = window.sunWeb.sidechain.address.fromHex(
       accountAddress
     ); // Base58
     tronAddress = accountAddressInBase58;
@@ -65,9 +90,9 @@ export default class TronLinkInfo extends Component {
   //
   // // The function below will return the account balance in SUN as a number
   async fetchAccountBalance() {
-    const balanceInSun = await window.tronWeb.trx.getBalance(); //number
-    const balanceInTRX = window.tronWeb.fromSun(balanceInSun); //string
-    const changeBackToSun = window.tronWeb.toSun(balanceInTRX); //string
+    const balanceInSun = await window.sunWeb.sidechain.trx.getBalance(); //number
+    const balanceInTRX = window.sunWeb.sidechain.fromSun(balanceInSun); //string
+    const changeBackToSun = window.sunWeb.sidechain.toSun(balanceInTRX); //string
 
     this.setState({
       accountBalance: balanceInTRX
@@ -90,7 +115,7 @@ export default class TronLinkInfo extends Component {
     var books;
     var i;
     var tokenValue = [];
-    let info = await window.tronWeb.trx.getAccount();
+    let info = await window.sunWeb.sidechain.trx.getAccount();
     var tokenQuantityHistory = 0;
     var tokenQuantityPositiveBalance = 0;
     //  window.alert("Wait until Book List update finishes...")
@@ -103,7 +128,7 @@ export default class TronLinkInfo extends Component {
         //Ignore assets with 0 banlance
         tokenQuantityPositiveBalance++; //Getting total amount of tokens with positive balance
         tokenIDs[i] = info.assetV2[i].key; //Taking token IDs
-        books = await window.tronWeb.trx.getTokenFromID(tokenIDs[i]);
+        books = await window.sunWeb.sidechain.trx.getTokenFromID(tokenIDs[i]);
         console.log(books);
         tokenName[i] = books.name;
         tokenValue[i] = info.assetV2[i].value / Math.pow(10, books.precision); //Taking token values(Number of books per token)
@@ -142,7 +167,7 @@ export default class TronLinkInfo extends Component {
       "Number of tokens with positive balance: " + tokenQuantityPositiveBalance
     );
     //window.tronWeb.trx.sendToken("TYGajccn93oPPUvGfiueu8x7fMkVEPDgMB", 1000000, "1002736")
-    window.alert("Book list updated :)");
+    //window.alert("Book list updated :)");
   }
 
   render() {
@@ -158,7 +183,7 @@ export default class TronLinkInfo extends Component {
     return (
       <div className="tronLinkInfo-component-container">
         <MediaCard />
-        <Divider />
+
         <div className="account-info-header">Liverum Account</div>
         <div className="account-info-address">
           Address: <span>{accountAddress}</span>
