@@ -12,6 +12,11 @@ import MediaCard from "../LiverumIntroHome/intro.js";
 export var tokenIDs = [];
 export var tileDataMod = [];
 export var tokenQty = [];
+
+export var tokenIDsSide = [];
+export var tileDataModSide = [];
+export var tokenQtySide = [];
+export var sunNetworkAliveFlag = 0;
 export var tronAddress = "";
 var j = 0;
 const mainGatewayAddress = "TWaPZru6PR5VjgT4sJrrZ481Zgp3iJ8Rfo";
@@ -30,13 +35,24 @@ const sidechain = new TronWeb({
   eventServer: "https://sun.tronex.io"
 });
 
-const sunWeb = new SunWeb(
+const liverumWeb = new SunWeb(
   mainchain,
   sidechain,
   mainGatewayAddress,
   sideGatewayAddress,
   sideChainId
 );
+
+async function myFunctionSide(item, index) {
+  for (var i = 0; i < tokenIDsSide.length; i++) {
+    if (tokenIDsSide[i] == item.tokenid) {
+      console.log("SunNetwork match in: " + i + " " + j);
+      tileDataModSide[j] = tileData[index];
+      console.log("Token ID SUNnetwork: " + tokenIDsSide[i]);
+      j++;
+    }
+  }
+}
 
 async function myFunction(item, index) {
   for (var i = 0; i < tokenIDs.length; i++) {
@@ -54,91 +70,105 @@ export default class TronLinkInfo extends Component {
     super(props);
 
     this.state = {
-      accountAddress: "account address will show up here",
-      accountBalance: "account balance will show up here",
-      accountBandwidth: "account bandwidth will show up here",
-      accountTokensValue: "account tokens will show up here",
-      accountTokensName: "accout tokens name will show up here",
-      accountNumberOfTokens: "account total no. of tokens",
-      accountTokenIds: "accout tokens"
+      accountAddressMainChain: "account address will show up here",
+      accountBalanceMainChain: "account balance will show up here",
+      accountBandwidthMainChain: "account bandwidth will show up here",
+      accountTokensValueMainChain: "account tokens will show up here",
+      accountTokensNameMainChain: "accout tokens name will show up here",
+      accountNumberOfTokensMainChain: "account total no. of tokens",
+      accountTokenIdsMainChain: "accout tokens",
+      accountAddressSideChain: "account address will show up here",
+      accountBalanceSideChain: "account balance will show up here",
+      accountBandwidthSideChain: "account bandwidth will show up here",
+      accountTokensValueSideChain: "account tokens will show up here",
+      accountTokensNameSideChain: "accout tokens name will show up here",
+      accountNumberOfTokensSideChain: "account total no. of tokens",
+      accountTokenIdsSideChain: "accout tokens"
     };
   }
 
   // Uncomment each call one at a time to see your account information filled out
   componentDidMount() {
-    this.fetchAccountAddress();
-    this.fetchAccountBalance();
-    this.fetchAccountBandwidth();
-    this.getTokensBalance();
-    //this.myFunction();
-    //Promise.all([promise1,promise2,promise3]);
+    this.fetchAccountAddressMain();
+    this.fetchAccountBalanceMain();
+    this.fetchAccountBandwidthMain();
+    this.getTokensBalanceMain();
+    this.fetchAccountAddressSide();
+    this.fetchAccountBalanceSide();
+    this.fetchAccountBandwidthSide();
+    this.getTokensBalanceSide();
   }
 
-  // // The function below will return an object with address, balance, create_time,
-  // // account_resource;
-  async fetchAccountAddress() {
-    const account = await window.sunWeb.sidechain.trx.getAccount();
+  /*********************************Main Chain functions:*********************************************/
+
+  async fetchAccountAddressMain() {
+    const account = await window.tronWeb.trx.getAccount();
     const accountAddress = account.address; // HexString(Ascii)
-    const accountAddressInBase58 = window.sunWeb.sidechain.address.fromHex(
+    const accountAddressInBase58 = window.tronWeb.address.fromHex(
       accountAddress
     ); // Base58
     tronAddress = accountAddressInBase58;
     this.setState({
-      accountAddress: accountAddressInBase58
+      accountAddressMainChain: accountAddressInBase58
     });
   }
   //
   // // The function below will return the account balance in SUN as a number
-  async fetchAccountBalance() {
-    const balanceInSun = await window.sunWeb.sidechain.trx.getBalance(); //number
-    const balanceInTRX = window.sunWeb.sidechain.fromSun(balanceInSun); //string
-    const changeBackToSun = window.sunWeb.sidechain.toSun(balanceInTRX); //string
+  async fetchAccountBalanceMain() {
+    const balanceInSun = await window.tronWeb.trx.getBalance(); //number
+    const balanceInTRX = window.tronWeb.fromSun(balanceInSun); //string
+    const changeBackToSun = window.tronWeb.toSun(balanceInTRX); //string
 
     this.setState({
-      accountBalance: balanceInTRX
+      accountBalanceMainChain: balanceInTRX
     });
   }
   //
   // // The function below will return the account bandwidth as a number
-  async fetchAccountBandwidth() {
+  async fetchAccountBandwidthMain() {
     const accountBandwidth = await window.tronWeb.trx.getBandwidth(); // number
 
     this.setState({
-      accountBandwidth: accountBandwidth
+      accountBandwidthMainChain: accountBandwidth
     });
   }
 
-  async getTokensBalance() {
+  async getTokensBalanceMain() {
     //const WALLET_ADDRESS = 'TRxrmHDysqAMHNo2eEtSvcMoJpDnWLqnZ4';
     var tokenName = [];
 
     var books;
     var i;
     var tokenValue = [];
-    let info = await window.sunWeb.sidechain.trx.getAccount();
-    var tokenQuantityHistory = 0;
+    let info = await window.tronWeb.trx.getAccount();
+    var tokenTotals = 0;
     var tokenQuantityPositiveBalance = 0;
     //  window.alert("Wait until Book List update finishes...")
-    //console.log(info); //DEbug
-    tokenQuantityHistory = info.assetV2.length;
-    //console.log("Number of tokens: " + tokenQuantityHistory);
+    console.log(
+      "**********************MAIN CHAIN PROCESS***************************"
+    );
+    try {
+      tokenTotals = info.assetV2.length;
+      //console.log("Number of tokens: " + tokenTotals);
 
-    for (i = 0; i < tokenQuantityHistory; i++) {
-      if (info.assetV2[i].value > 0) {
-        //Ignore assets with 0 banlance
-        tokenQuantityPositiveBalance++; //Getting total amount of tokens with positive balance
-        tokenIDs[i] = info.assetV2[i].key; //Taking token IDs
-        books = await window.sunWeb.sidechain.trx.getTokenFromID(tokenIDs[i]);
-        console.log(books);
-        tokenName[i] = books.name;
-        tokenValue[i] = info.assetV2[i].value / Math.pow(10, books.precision); //Taking token values(Number of books per token)
-        console.log(tokenIDs[i] + " " + tokenName[i] + " = " + tokenValue[i]); //Debug sentence
+      for (i = 0; i < tokenTotals; i++) {
+        if (info.assetV2[i].value > 0) {
+          //Ignore assets with 0 banlance
+          tokenQuantityPositiveBalance++; //Getting total amount of tokens with positive balance
+          tokenIDs[i] = info.assetV2[i].key; //Taking token IDs
+          books = await window.tronWeb.trx.getTokenFromID(tokenIDs[i]);
+          console.log(books);
+          tokenName[i] = books.name;
+          tokenValue[i] = info.assetV2[i].value / Math.pow(10, books.precision); //Taking token values(Number of books per token)
+          console.log(tokenIDs[i] + " " + tokenName[i] + " = " + tokenValue[i]); //Debug sentence
+        }
       }
+      /*tokenIDs = tokenIDs.filter(function (el) {
+                    return el != null;
+                });*/
+    } catch (e) {
+      window.alert("No TokenBooks found in wallet, please check");
     }
-    /*tokenIDs = tokenIDs.filter(function (el) {
-                return el != null;
-            });*/
-
     tokenName = tokenName.filter(function(el) {
       return el != null;
     });
@@ -157,10 +187,10 @@ export default class TronLinkInfo extends Component {
     //console.log(booksjson.tokenId[1]);
 
     this.setState({
-      accountTokensValue: tokenValue,
-      accountTokensName: tokenName,
-      accountNumberOfTokens: tokenQuantityPositiveBalance,
-      accountTokenIds: tokenIDs
+      accountTokensValueMainChain: tokenValue,
+      accountTokensNameMainChain: tokenName,
+      accountNumberOfTokensMainChain: tokenQuantityPositiveBalance,
+      accountTokenIdsMainChain: tokenIDs
     });
 
     console.log(
@@ -170,29 +200,160 @@ export default class TronLinkInfo extends Component {
     //window.alert("Book list updated :)");
   }
 
+  /*********************************Side Chain functions:*********************************************/
+
+  async fetchAccountAddressSide() {
+    const account = await window.tronWeb.trx.getAccount();
+    const accountAddress = account.address; // HexString(Ascii)
+    const accountAddressInBase58 = window.tronWeb.address.fromHex(
+      accountAddress
+    ); // Base58
+    tronAddress = accountAddressInBase58;
+    this.setState({
+      accountAddressSideChain: accountAddressInBase58
+    });
+  }
+  //
+  // // The function below will return the account balance in SUN as a number
+  async fetchAccountBalanceSide() {
+    try {
+      const balanceInSun = await window.sunWeb.sidechain.trx.getBalance(); //number
+      const balanceInTRX = window.sunWeb.sidechain.fromSun(balanceInSun); //string
+      const changeBackToSun = window.sunWeb.sidechain.toSun(balanceInTRX); //string
+
+      this.setState({
+        accountBalanceSideChain: balanceInTRX
+      });
+      sunNetworkAliveFlag = 0;
+    } catch (e) {
+      window.alert(
+        "SunNetwork not supported in this browser, switching to Mainchain..."
+      );
+      sunNetworkAliveFlag = 1;
+    }
+  }
+  //
+  // // The function below will return the account bandwidth as a number
+  async fetchAccountBandwidthSide() {
+    const accountBandwidth = await window.tronWeb.trx.getBandwidth(); // number
+
+    this.setState({
+      accountBandwidthSideChain: accountBandwidth
+    });
+  }
+
+  async getTokensBalanceSide() {
+    //const WALLET_ADDRESS = 'TRxrmHDysqAMHNo2eEtSvcMoJpDnWLqnZ4';
+    try {
+      var tokenName = [];
+      var books;
+      var i;
+      var tokenValue = [];
+      let info = await window.sunWeb.sidechain.trx.getAccount();
+      var tokenTotals = 0;
+      var tokenQuantityPositiveBalance = 0;
+      //  window.alert("Wait until Book List update finishes...")
+      console.log(
+        "**********************SIDE CHAIN PROCESS***************************"
+      ); //DEbug
+
+      tokenTotals = info.assetV2.length;
+      //console.log("Number of tokens: " + tokenTotals);
+
+      for (i = 0; i < tokenTotals; i++) {
+        if (info.assetV2[i].value > 0) {
+          //Ignore assets with 0 banlance
+          tokenQuantityPositiveBalance++; //Getting total amount of tokens with positive balance
+          tokenIDsSide[i] = info.assetV2[i].key; //Taking token IDs
+          books = await window.sunWeb.sidechain.trx.getTokenFromID(
+            tokenIDsSide[i]
+          );
+          console.log(books);
+          tokenName[i] = books.name;
+          tokenValue[i] = info.assetV2[i].value / Math.pow(10, books.precision); //Taking token values(Number of books per token)
+          console.log(
+            tokenIDsSide[i] + " " + tokenName[i] + " = " + tokenValue[i]
+          ); //Debug sentence
+        }
+      }
+      sunNetworkAliveFlag = 0;
+    } catch (e) {
+      window.alert("No SunNetwork TokenBooks found in wallet, please check...");
+      sunNetworkAliveFlag = 1;
+    }
+    tokenName = tokenName.filter(function(el) {
+      return el != null;
+    });
+
+    tokenValue = tokenValue.filter(function(el) {
+      return el != null;
+    });
+    tokenQty = tokenValue;
+
+    //let booksjson = require("../bookList/books.json");
+    console.log(tokenIDsSide);
+
+    tileData.forEach(myFunctionSide);
+    j = 0;
+
+    console.log(tileDataModSide);
+    //console.log(booksjson.tokenId[1]);
+
+    this.setState({
+      accountTokensValue: tokenValue,
+      accountTokensName: tokenName,
+      accountNumberOfTokens: tokenQuantityPositiveBalance,
+      accountTokenIds: tokenIDsSide
+    });
+
+    console.log(
+      "Number of tokens with positive balance: " + tokenQuantityPositiveBalance
+    );
+  }
+
+  /*************************Render**************************************************/
+
   render() {
     const {
-      accountAddress,
-      accountBalance,
-      accountBandwidth,
-      accountTokensValue,
-      accountTokensName,
-      accountNumberOfTokens,
-      accountTokenIds
+      accountAddressMainChain,
+      accountBalanceMainChain,
+      accountBandwidthMainChain,
+      accountTokensValueMainChain,
+      accountTokensNameMainChain,
+      accountNumberOfTokensMainChain,
+      accountTokenIdsMainChain,
+      accountAddressSideChain,
+      accountBalanceSideChain,
+      accountBandwidthSideChain,
+      accountTokensValueSideChain,
+      accountTokensNameSideChain,
+      accountNumberOfTokensSideChain,
+      accountTokenIdsSideChain
     } = this.state;
     return (
       <div className="tronLinkInfo-component-container">
         <MediaCard />
-
+        <Divider />
         <div className="account-info-header">Liverum Account</div>
         <div className="account-info-address">
-          Address: <span>{accountAddress}</span>
+          MainChain Address: <span>{accountAddressMainChain}</span>
         </div>
         <div className="account-info-balance">
-          TRON Balance: <span>{accountBalance}</span>
+          MainChain TRON Balance: <span>{accountBalanceMainChain}</span>
         </div>
         <div className="account-info-bandwidth">
-          Bandwidth: <span>{accountBandwidth}</span>
+          MainChain Bandwidth: <span>{accountBandwidthMainChain}</span>
+        </div>
+        <div className="account-info-tokens"></div>
+        <Divider />
+        <div className="account-info-address">
+          SunNetwork Address: <span>{accountAddressSideChain}</span>
+        </div>
+        <div className="account-info-balance">
+          SunNetwork TRON Balance: <span>{accountBalanceSideChain}</span>
+        </div>
+        <div className="account-info-bandwidth">
+          SunNetwork Bandwidth: <span>{accountBandwidthSideChain}</span>
         </div>
         <div className="account-info-tokens"></div>
       </div>

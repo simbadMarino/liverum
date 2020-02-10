@@ -33,36 +33,40 @@ export default function MediaCard() {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Home,sweet home :)
+            Bookshelf, sweet bookshelf :)
           </Typography>
           <Typography variant="subtitle1" color="textSecondary" component="p">
             This is your home page to a new way of owning your favorite digital
             books, Liverum is all about bringing True Book reading experience to
             the digital world. Buy, sell, lend and gift your books securely and
             piracy free.
-            <Typography variant="subtitle2" color="textSecondary" component="p">
-              Make sure you have at least one of the following tokens to play
-              around with your Liverum book reader:
-            </Typography>
-            <Typography variant="subtitle2" color="textSecondary" component="p">
-              -Count of Montecristo book: BTT (TRC-10)
-            </Typography>
-            <Typography variant="subtitle2" color="textSecondary" component="p">
-              -Robinson Crusoe book: SEED (TRC-10)
-            </Typography>
-            <Typography variant="subtitle2" color="textSecondary" component="p">
-              -Mysterious Island book: TESTTWO (TRC-10)
-            </Typography>
-            <Typography variant="subtitle2" color="textSecondary" component="p">
-              -Sherlock Holmes book: CommunityNodeTOken (TRC-10)
-            </Typography>
-            <Typography variant="subtitle2" color="textPrimary" component="p">
-              Built on TRON blockchain.
-            </Typography>
+          </Typography>
+          <Typography variant="subtitle2" color="textSecondary" component="p">
+            Make sure you have at least one of the following tokens to play
+            around with your Liverum book reader:
+          </Typography>
+          <Typography variant="subtitle2" color="textSecondary" component="p">
+            -Count of Montecristo book: BTT (TRC-10)
+          </Typography>
+          <Typography variant="subtitle2" color="textSecondary" component="p">
+            -Robinson Crusoe book: SEED (TRC-10)
+          </Typography>
+          <Typography variant="subtitle2" color="textSecondary" component="p">
+            -Mysterious Island book: TESTTWO (TRC-10)
+          </Typography>
+          <Typography variant="subtitle2" color="textSecondary" component="p">
+            -Sherlock Holmes book: CommunityNodeTOken (TRC-10)
+          </Typography>
+          <Typography variant="subtitle2" color="textPrimary" component="p">
+            Built on TRON blockchain.
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions></CardActions>
+      <CardActions>
+        <Button size="small" color="primary" href="http://liverum.xyz">
+          Learn More
+        </Button>
+      </CardActions>
     </Card>
   );
 }

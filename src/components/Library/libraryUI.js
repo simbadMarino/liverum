@@ -9,8 +9,10 @@ import MenuBook from "@material-ui/icons/MenuBook";
 import { tileData } from "./bookList.js";
 import { makeStyles } from "@material-ui/core/styles";
 import LiverumBook from "./bookUI";
-import { tokenIDs } from "../TronLinkInfo/index.js";
+import { tokenIDsSide } from "../TronLinkInfo/index.js";
+import { tileDataModSide } from "../TronLinkInfo/index.js";
 import { tileDataMod } from "../TronLinkInfo/index.js";
+import { sunNetworkAliveFlag } from "../TronLinkInfo/index.js";
 import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles(theme => ({
@@ -40,67 +42,106 @@ export default function TitlebarGridList() {
 
   const handleListItemClick = (event, tokenId, url, title) => {
     setSelectedIndex(tokenId);
-    //console.log(tokenId);
     bookURL = url;
     bookTitle = title;
-    //console.log(bookTitle);
-    //console.log(bookURL);
-
-    //  var foundID =  tokenIDs.findIndex(getTokens)
-    //  console.log(foundID)
   };
 
-  /*function getTokens(ids,index,tokenIDs)
-{
-
-  if(index<tileData.length)
-  {
-  var counter = index;
-  console.log("[" + index + "]" + "Token from blockchain: " + ids)
-  console.log("token from book database: " + tileData[counter].tokenid);
-  }
-  console.log("Token to compare: " + counter)
-  return ids == tileData[counter].tokenid;
-}*/
-
-  return (
-    <div className={classes.root}>
-      <Container maxWidth="md">
-        <GridList cellHeight={600} className={classes.gridList}>
-          <GridListTile
-            key="Subheader"
-            cols={2}
-            rows={2}
-            spacing={5}
-            style={{ height: 50 }}
-          >
-            <ListSubheader component="div"></ListSubheader>
-          </GridListTile>
-          {tileDataMod.map(tile => (
-            <GridListTile key={tile.img}>
-              <img
-                src={tile.img}
-                onClick={event =>
-                  handleListItemClick(event, tile.tokenid, tile.url, tile.title)
-                }
-              />
-              <GridListTileBar />
+  if (sunNetworkAliveFlag == 1) {
+    //SunNetwork is NOT available?
+    //window.alert("TRON mainchain selected, SunNetwork not available");
+    return (
+      <div className={classes.root}>
+        <Container maxWidth="xs">
+          MainChain Bookshelf
+          <GridList cellHeight={200} className={classes.gridList}>
+            <GridListTile
+              key="Subheader"
+              cols={2}
+              rows={2}
+              spacing={5}
+              style={{ height: 50 }}
+            >
+              <ListSubheader component="div"></ListSubheader>
             </GridListTile>
-          ))}
-        </GridList>
-        {selectedIndex === "1002000" ? (
-          <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
-        ) : null}
-        {selectedIndex === "1000001" ? (
-          <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
-        ) : null}
-        {selectedIndex === "1002072" ? (
-          <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
-        ) : null}
-        {selectedIndex === "1000322" ? (
-          <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
-        ) : null}
-      </Container>
-    </div>
-  );
+            {tileDataMod.map(tile => (
+              <GridListTile key={tile.img}>
+                <img
+                  src={tile.img}
+                  onClick={event =>
+                    handleListItemClick(
+                      event,
+                      tile.tokenid,
+                      tile.url,
+                      tile.title
+                    )
+                  }
+                />
+                <GridListTileBar />
+              </GridListTile>
+            ))}
+          </GridList>
+          {selectedIndex === "1002000" ? (
+            <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
+          ) : null}
+          {selectedIndex === "1000001" ? (
+            <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
+          ) : null}
+          {selectedIndex === "1002072" ? (
+            <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
+          ) : null}
+          {selectedIndex === "1000322" ? (
+            <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
+          ) : null}
+        </Container>
+      </div>
+    );
+  } else {
+    //window.alert("SunNetwork available :)");
+    return (
+      <div className={classes.root}>
+        <Container maxWidth="xs">
+          SunNetwork Bookshelf
+          <GridList cellHeight={200} className={classes.gridList}>
+            <GridListTile
+              key="Subheader"
+              cols={2}
+              rows={2}
+              style={{ height: 50 }}
+            >
+              <ListSubheader component="div"></ListSubheader>
+            </GridListTile>
+
+            {tileDataModSide.map(tile => (
+              <GridListTile key={tile.img}>
+                <img
+                  src={tile.img}
+                  onClick={event =>
+                    handleListItemClick(
+                      event,
+                      tile.tokenid,
+                      tile.url,
+                      tile.title
+                    )
+                  }
+                />
+                <GridListTileBar />
+              </GridListTile>
+            ))}
+          </GridList>
+          {selectedIndex === "1002000" ? (
+            <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
+          ) : null}
+          {selectedIndex === "1000001" ? (
+            <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
+          ) : null}
+          {selectedIndex === "1002072" ? (
+            <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
+          ) : null}
+          {selectedIndex === "1000322" ? (
+            <LiverumBook bookUrl={bookURL} bookTitle={bookTitle} />
+          ) : null}
+        </Container>
+      </div>
+    );
+  }
 }

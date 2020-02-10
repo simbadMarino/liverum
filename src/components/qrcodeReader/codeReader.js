@@ -11,6 +11,8 @@ import Divider from "@material-ui/core/Divider";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { tileDataMod } from "../TronLinkInfo/index.js";
+import { tileDataModSide } from "../TronLinkInfo/index.js";
+import { sunNetworkAliveFlag } from "../TronLinkInfo/index.js";
 import TextField from "@material-ui/core/TextField";
 
 var bookToTransfer = "";
@@ -74,52 +76,103 @@ export default function ControlledOpenSelect() {
     console.log(event.target.value);
     addyToTransfer = event.target.value;
   };
+  if (sunNetworkAliveFlag == 1) {
+    //SunNetwork is not available
+    return (
+      <div>
+        <img src={BookExchange} width="200" height="200" />
+        <Divider />
+        <FormControl className={classes.formControl}>
+          <InputLabel id="BookList">Select Book</InputLabel>
+          <Select
+            labelId="BookList-label"
+            id="BookList-controlled-open-select"
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={age}
+            onChange={handleChange}
+          >
+            {tileDataMod.map(tile => (
+              <MenuItem value={tile.tokenid}>{tile.title}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <TextField
+          id="Txt_tokenid"
+          label="Token ID"
+          variant="filled"
+          value={bookToTransfer}
+        />
+        <Divider />
+        <TextField
+          id="Txt_Addy"
+          label="Receiver TRON Address"
+          variant="outlined"
+          onChange={handleChangeAddy}
+        />
 
-  return (
-    <div>
-      <img src={BookExchange} width="200" height="200" />
-      <Divider />
-      <FormControl className={classes.formControl}>
-        <InputLabel id="BookList">Select Book</InputLabel>
-        <Select
-          labelId="BookList-label"
-          id="BookList-controlled-open-select"
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          value={age}
-          onChange={handleChange}
-        >
-          {tileDataMod.map(tile => (
-            <MenuItem value={tile.tokenid}>{tile.title}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <TextField
-        id="Txt_tokenid"
-        label="Token ID"
-        variant="filled"
-        value={bookToTransfer}
-      />
-      <Divider />
-      <TextField
-        id="Txt_Addy"
-        label="Receiver TRON Address"
-        variant="outlined"
-        onChange={handleChangeAddy}
-      />
+        <Button variant="outlined" onClick={handleClick}>
+          Share book
+        </Button>
 
-      <Button variant="outlined" onClick={handleClick}>
-        Share book
-      </Button>
+        <Snackbar open_={open} autoHideDuration={6000} onClose_={handleClose}>
+          <Alert onClose_={handleClose} severity="success">
+            This is a success message!
+          </Alert>
+        </Snackbar>
+      </div>
+    );
+  } else {
+    //SunNetwork is available :)
+    {
+      return (
+        <div>
+          <img src={BookExchange} width="200" height="200" />
+          <Divider />
+          <FormControl className={classes.formControl}>
+            <InputLabel id="BookList">Select Book</InputLabel>
+            <Select
+              labelId="BookList-label"
+              id="BookList-controlled-open-select"
+              open={open}
+              onClose={handleClose}
+              onOpen={handleOpen}
+              value={age}
+              onChange={handleChange}
+            >
+              {tileDataModSide.map(tile => (
+                <MenuItem value={tile.tokenid}>{tile.title}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField
+            id="Txt_tokenid"
+            label="Token ID"
+            variant="filled"
+            value={bookToTransfer}
+          />
+          <Divider />
+          <TextField
+            id="Txt_Addy"
+            label="Receiver TRON Address"
+            variant="outlined"
+            onChange={handleChangeAddy}
+          />
 
-      <Snackbar open_={open} autoHideDuration={6000} onClose_={handleClose}>
-        <Alert onClose_={handleClose} severity="success">
-          This is a success message!
-        </Alert>
-      </Snackbar>
-    </div>
-  );
+          <Button variant="outlined" onClick={handleClick}>
+            Share book
+          </Button>
+
+          <Snackbar open_={open} autoHideDuration={6000} onClose_={handleClose}>
+            <Alert onClose_={handleClose} severity="success">
+              This is a success message!
+            </Alert>
+          </Snackbar>
+        </div>
+      );
+    }
+  }
 }
 
 /*  <Divider />
