@@ -9,6 +9,7 @@ export const tileData = [
     title: "Count of Montecristo",
     author: "Alexandre Dumas",
     tokenid: "1002000", //TRC-10 BTT token
+    precision: 6,
     url:
       "https://gateway.btfssoter.io/btfs/QmZVMJXP4o7QRHFHpqECbjwewJXHFHG46T5wrroL7tK6iM/Montecristo.epub"
   },
@@ -17,6 +18,7 @@ export const tileData = [
     title: "Robinson Crusoe",
     author: "Daniel Defoe",
     tokenid: "1000001", // TRC-10 SEED
+    precision: 0,
     url:
       "https://gateway.btfssoter.io/btfs/QmdQ9pWT1fqpjroXc5Po4hFg6TQ7qWXrNvjfgLRGHxiAWt/Robinson%20Crusoe.epub"
   },
@@ -25,6 +27,7 @@ export const tileData = [
     title: "Mysterious Island",
     author: "Jules Verne",
     tokenid: "1002072", // TRC-10 TESTTWO Token
+    precision: 0,
     url:
       "https://standardebooks.org/ebooks/jules-verne/the-mysterious-island/stephen-w-white/dist/jules-verne_the-mysterious-island.epub"
   },
@@ -33,6 +36,7 @@ export const tileData = [
     title: "The Adventures of Sherlock Holmes",
     author: "Arthur Connan Doyle",
     tokenid: "1000322", //CommunityNodeTOken
+    precision: 0,
     url:
       "https://standardebooks.org/ebooks/arthur-conan-doyle/the-adventures-of-sherlock-holmes/dist/arthur-conan-doyle_the-adventures-of-sherlock-holmes.epub"
   }

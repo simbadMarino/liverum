@@ -14,9 +14,13 @@ import { tileDataMod } from "../TronLinkInfo/index.js";
 import { tileDataModSide } from "../TronLinkInfo/index.js";
 import { sunNetworkAliveFlag } from "../TronLinkInfo/index.js";
 import TextField from "@material-ui/core/TextField";
-
+import { mainchain } from "../TronLinkInfo/index.js";
+import { sidechain } from "../TronLinkInfo/index.js";
+import { liverumWeb } from "../TronLinkInfo/index.js";
+import SunWeb from "sunweb";
 var bookToTransfer = "";
 var addyToTransfer = "";
+var tokenPrecision = 0;
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
@@ -34,10 +38,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
 export default function ControlledOpenSelect() {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
@@ -47,14 +47,36 @@ export default function ControlledOpenSelect() {
     setAge(event.target.value);
     console.log(event.target.value);
     bookToTransfer = event.target.value;
+    if (bookToTransfer == "1002000") tokenPrecision = 6;
+    else tokenPrecision = 0;
     console.log("Changing book");
+    console.log(tokenPrecision);
   };
 
-  const handleClick = () => {
-    //console.log(tileDataMod);
-    var transactionToken = window.tronWeb.trx.sendToken(
+  const handleClickMainChain = () => {
+    console.log("MainChain" + tileDataMod);
+    console.log(addyToTransfer + bookToTransfer);
+
+    try {
+      var transactionToken = window.tronWeb.trx.sendToken(
+        addyToTransfer,
+        Math.pow(10, tokenPrecision),
+        bookToTransfer
+      );
+      console.log(transactionToken);
+    } catch (err) {
+      console.log("Transaction not performed");
+    } finally {
+      console.log("We tried to execute");
+    }
+  };
+
+  const handleClickSideChain = () => {
+    console.log("SideChain" + tileDataMod);
+    console.log(addyToTransfer + bookToTransfer);
+    var transactionToken = window.sunWeb.sidechain.trx.sendToken(
       addyToTransfer,
-      1000000,
+      Math.pow(10, tokenPrecision),
       bookToTransfer
     );
     console.log(transactionToken);
@@ -62,6 +84,7 @@ export default function ControlledOpenSelect() {
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
+      console.log("hey there");
       return;
     }
 
@@ -112,15 +135,9 @@ export default function ControlledOpenSelect() {
           onChange={handleChangeAddy}
         />
 
-        <Button variant="outlined" onClick={handleClick}>
+        <Button variant="outlined" onClick={handleClickMainChain}>
           Share book
         </Button>
-
-        <Snackbar open_={open} autoHideDuration={6000} onClose_={handleClose}>
-          <Alert onClose_={handleClose} severity="success">
-            This is a success message!
-          </Alert>
-        </Snackbar>
       </div>
     );
   } else {
@@ -160,15 +177,9 @@ export default function ControlledOpenSelect() {
             onChange={handleChangeAddy}
           />
 
-          <Button variant="outlined" onClick={handleClick}>
+          <Button variant="outlined" onClick={handleClickSideChain}>
             Share book
           </Button>
-
-          <Snackbar open_={open} autoHideDuration={6000} onClose_={handleClose}>
-            <Alert onClose_={handleClose} severity="success">
-              This is a success message!
-            </Alert>
-          </Snackbar>
         </div>
       );
     }

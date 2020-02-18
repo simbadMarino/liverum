@@ -12,7 +12,7 @@ import bookShelf from "../files/bookshelf.jpg";
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 845
+    maxWidth: 645
   },
   media: {
     height: 200,

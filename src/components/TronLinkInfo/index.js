@@ -5,7 +5,13 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import TronWeb from "tronweb";
 import SunWeb from "sunweb";
-//import TitlebarGridList from "../Library/libraryUI.js";
+import SimpleSnackbar from "../Alerts/alerts.js";
+import Covers from "../Covers/coverSelection.js";
+import Typography from "@material-ui/core/Typography";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { tileData } from "../Library/bookList.js";
 import liverumLogo from "../files/LiverumLogo.png";
 import MediaCard from "../LiverumIntroHome/intro.js";
@@ -23,19 +29,19 @@ const mainGatewayAddress = "TWaPZru6PR5VjgT4sJrrZ481Zgp3iJ8Rfo";
 const sideGatewayAddress = "TGKotco6YoULzbYisTBuP6DWXDjEgJSpYz";
 const sideChainId = "41E209E4DE650F0150788E8EC5CAFA240A23EB8EB7";
 
-const mainchain = new TronWeb({
+export const mainchain = new TronWeb({
   fullNode: "https://api.trongrid.io",
   solidityNode: "https://api.trongrid.io",
   eventServer: "https://api.trongrid.io"
 });
 
-const sidechain = new TronWeb({
+export const sidechain = new TronWeb({
   fullNode: "https://sun.tronex.io",
   solidityNode: "https://sun.tronex.io",
   eventServer: "https://sun.tronex.io"
 });
 
-const liverumWeb = new SunWeb(
+export const liverumWeb = new SunWeb(
   mainchain,
   sidechain,
   mainGatewayAddress,
@@ -93,9 +99,11 @@ export default class TronLinkInfo extends Component {
     this.fetchAccountBalanceMain();
     this.fetchAccountBandwidthMain();
     this.getTokensBalanceMain();
-    this.fetchAccountAddressSide();
-    this.fetchAccountBalanceSide();
-    this.fetchAccountBandwidthSide();
+    try {
+      this.fetchAccountAddressSide();
+      this.fetchAccountBalanceSide();
+      this.fetchAccountBandwidthSide();
+    } catch (e) {}
     this.getTokensBalanceSide();
   }
 
@@ -235,7 +243,7 @@ export default class TronLinkInfo extends Component {
   //
   // // The function below will return the account bandwidth as a number
   async fetchAccountBandwidthSide() {
-    const accountBandwidth = await window.tronWeb.trx.getBandwidth(); // number
+    const accountBandwidth = await window.sunWeb.sidechain.trx.getBandwidth(); // number
 
     this.setState({
       accountBandwidthSideChain: accountBandwidth
@@ -332,30 +340,40 @@ export default class TronLinkInfo extends Component {
     } = this.state;
     return (
       <div className="tronLinkInfo-component-container">
+        <Divider />
+        <Covers />
+
+        <ExpansionPanel width="245">
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+            width="245"
+          >
+            <Typography className="heading">Liverum Account</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
+            <Typography>
+              <div className="account-info-address">
+                MainChain Address: <span>{accountAddressMainChain}</span>
+              </div>
+              <div className="account-info-balance">
+                MainChain TRON Balance: <span>{accountBalanceMainChain}</span>
+              </div>
+              <div className="account-info-bandwidth">
+                MainChain Bandwidth: <span>{accountBandwidthMainChain}</span>
+              </div>
+              <Divider />
+              <div className="account-info-balance">
+                SunNetwork TRON Balance: <span>{accountBalanceSideChain}</span>
+              </div>
+              <div className="account-info-bandwidth">
+                SunNetwork Bandwidth: <span>{accountBandwidthSideChain}</span>
+              </div>
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
         <MediaCard />
-        <Divider />
-        <div className="account-info-header">Liverum Account</div>
-        <div className="account-info-address">
-          MainChain Address: <span>{accountAddressMainChain}</span>
-        </div>
-        <div className="account-info-balance">
-          MainChain TRON Balance: <span>{accountBalanceMainChain}</span>
-        </div>
-        <div className="account-info-bandwidth">
-          MainChain Bandwidth: <span>{accountBandwidthMainChain}</span>
-        </div>
-        <div className="account-info-tokens"></div>
-        <Divider />
-        <div className="account-info-address">
-          SunNetwork Address: <span>{accountAddressSideChain}</span>
-        </div>
-        <div className="account-info-balance">
-          SunNetwork TRON Balance: <span>{accountBalanceSideChain}</span>
-        </div>
-        <div className="account-info-bandwidth">
-          SunNetwork Bandwidth: <span>{accountBandwidthSideChain}</span>
-        </div>
-        <div className="account-info-tokens"></div>
       </div>
     );
   }
