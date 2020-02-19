@@ -99,11 +99,8 @@ export default class TronLinkInfo extends Component {
     this.fetchAccountBalanceMain();
     this.fetchAccountBandwidthMain();
     this.getTokensBalanceMain();
-    try {
-      this.fetchAccountAddressSide();
-      this.fetchAccountBalanceSide();
-      this.fetchAccountBandwidthSide();
-    } catch (e) {}
+    this.fetchAccountBalanceSide();
+    this.fetchAccountBandwidthSide();
     this.getTokensBalanceSide();
   }
 
@@ -210,17 +207,6 @@ export default class TronLinkInfo extends Component {
 
   /*********************************Side Chain functions:*********************************************/
 
-  async fetchAccountAddressSide() {
-    const account = await window.tronWeb.trx.getAccount();
-    const accountAddress = account.address; // HexString(Ascii)
-    const accountAddressInBase58 = window.tronWeb.address.fromHex(
-      accountAddress
-    ); // Base58
-    tronAddress = accountAddressInBase58;
-    this.setState({
-      accountAddressSideChain: accountAddressInBase58
-    });
-  }
   //
   // // The function below will return the account balance in SUN as a number
   async fetchAccountBalanceSide() {
@@ -243,11 +229,15 @@ export default class TronLinkInfo extends Component {
   //
   // // The function below will return the account bandwidth as a number
   async fetchAccountBandwidthSide() {
-    const accountBandwidth = await window.sunWeb.sidechain.trx.getBandwidth(); // number
+    try {
+      const accountBandwidth = await window.sunWeb.sidechain.trx.getBandwidth(); // number
 
-    this.setState({
-      accountBandwidthSideChain: accountBandwidth
-    });
+      this.setState({
+        accountBandwidthSideChain: accountBandwidth
+      });
+    } catch (e) {
+      console.log("SideChainBalance could not be retrieved from this browser");
+    }
   }
 
   async getTokensBalanceSide() {
@@ -343,12 +333,11 @@ export default class TronLinkInfo extends Component {
         <Divider />
         <Covers />
 
-        <ExpansionPanel width="245">
+        <ExpansionPanel>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
-            width="245"
           >
             <Typography className="heading">Liverum Account</Typography>
           </ExpansionPanelSummary>

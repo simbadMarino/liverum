@@ -43,7 +43,7 @@ export default function MediaCard() {
           </Typography>
           <Typography variant="subtitle2" color="textSecondary" component="p">
             Make sure you have at least one of the following tokens to play
-            around with your Liverum book reader:
+            around with your Demo Liverum book reader:
           </Typography>
           <Typography variant="subtitle2" color="textSecondary" component="p">
             -Count of Montecristo book: BTT (TRC-10)
@@ -63,7 +63,11 @@ export default function MediaCard() {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" href="http://liverum.xyz">
+        <Button
+          size="small"
+          color="primary"
+          href="https://liverum.blogspot.com/2020/02/liverum-introduction.html"
+        >
           Learn More
         </Button>
       </CardActions>

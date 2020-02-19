@@ -6,6 +6,11 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import MenuBook from "@material-ui/icons/MenuBook";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
 import { tileData } from "./bookList.js";
 import { makeStyles } from "@material-ui/core/styles";
 import LiverumBook from "./bookUI";
@@ -19,7 +24,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper
   },
@@ -51,20 +55,14 @@ export default function TitlebarGridList() {
     //window.alert("TRON mainchain selected, SunNetwork not available");
     return (
       <div className={classes.root}>
-        <Container maxWidth="xs">
+        <Container maxWidth="auto">
           MainChain Bookshelf
-          <GridList cellHeight={200} className={classes.gridList}>
-            <GridListTile
-              key="Subheader"
-              cols={2}
-              rows={2}
-              spacing={5}
-              style={{ height: 50 }}
-            >
+          <GridList cellHeight={"auto"} className={classes.gridList}>
+            <GridList key="Subheader" cols={2} rows={2} spacing={5}>
               <ListSubheader component="div"></ListSubheader>
-            </GridListTile>
+            </GridList>
             {tileDataMod.map(tile => (
-              <GridListTile key={tile.img}>
+              <GridList key={tile.img}>
                 <img
                   src={tile.img}
                   onClick={event =>
@@ -76,8 +74,8 @@ export default function TitlebarGridList() {
                     )
                   }
                 />
-                <GridListTileBar />
-              </GridListTile>
+                <GridList />
+              </GridList>
             ))}
           </GridList>
           {selectedIndex === "1002000" ? (
@@ -101,18 +99,13 @@ export default function TitlebarGridList() {
       <div className={classes.root}>
         <Container maxWidth="xs">
           SunNetwork Bookshelf
-          <GridList cellHeight={200} className={classes.gridList}>
-            <GridListTile
-              key="Subheader"
-              cols={2}
-              rows={2}
-              style={{ height: 50 }}
-            >
+          <GridList cellHeight={"auto"} className={classes.gridList}>
+            <GridList key="Subheader" cols={2} rows={2}>
               <ListSubheader component="div"></ListSubheader>
-            </GridListTile>
+            </GridList>
 
             {tileDataModSide.map(tile => (
-              <GridListTile key={tile.img}>
+              <GridList key={tile.img}>
                 <img
                   src={tile.img}
                   onClick={event =>
@@ -124,8 +117,8 @@ export default function TitlebarGridList() {
                     )
                   }
                 />
-                <GridListTileBar />
-              </GridListTile>
+                <GridList />
+              </GridList>
             ))}
           </GridList>
           {selectedIndex === "1002000" ? (

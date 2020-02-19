@@ -95,6 +95,10 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen
     }),
     marginLeft: 0
+  },
+  card: {
+    maxWidth: 310,
+    justifyContent: "flex-end"
   }
 }));
 
@@ -207,7 +211,6 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary="Send Books" />
           </ListItem>
         </List>
-        <Divider />
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -225,7 +228,14 @@ export default function PersistentDrawerLeft() {
         ) : selectedIndex === 3 ? (
           <Card className={classes.card}>
             <CardActionArea>
-              <QRCode value={tronAddress} size={256} />
+              <QRCode
+                className={classes.card}
+                value={tronAddress}
+                size={320}
+                includeMargin="true"
+                fgColor="#8A4B08"
+              />
+              <div align="center">Scan and send me some bookTokens :)</div>
             </CardActionArea>
           </Card>
         ) : selectedIndex === 4 ? (
@@ -235,48 +245,3 @@ export default function PersistentDrawerLeft() {
     </div>
   );
 }
-
-/*
-
-
-<ListItem
-  button
-  selected={selectedIndex === 2}
-  onClick={event => handleListItemClick(event, 2)}
->
-  <ListItemIcon>
-    <StorefrontIcon />
-  </ListItemIcon>
-  <ListItemText primary="Liverum Store" />
-</ListItem>
-
-<List component="nav" aria-label="secondary liverum menus">
-<ListItem
-  button
-  selected={selectedIndex === 5}
-  onClick={event => handleListItemClick(event, 5)}
->
-  <ListItemIcon>
-    <TuneIcon />
-  </ListItemIcon>
-  <ListItemText primary="Settings" />
-</ListItem>
-</List>
-
-<Divider />
-
-
-
-<CardActions>
-  <Button size="small" color="default" >
-    <FileCopyIcon/>
-  </Button>
-
-  <Button size="small" color="default" >
-    <ShareIcon/>
-  </Button>
-</CardActions>
-
-
-
-*/
