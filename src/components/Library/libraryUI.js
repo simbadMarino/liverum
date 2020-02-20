@@ -73,7 +73,7 @@ export default function TitlebarGridList() {
     //window.alert("TRON mainchain selected, SunNetwork not available");
     return (
       <div className={classes.root}>
-        <Container maxWidth="md">
+        <Container maxWidth="xs">
           MainChain Bookshelf
           <Grid container className={classes.root} spacing={2}>
             <Grid item xs={6}>
